@@ -3,6 +3,7 @@ YELLOW  = \033[0;33m
 RESET   = \033[0m
 
 MAKEFLAGS += --no-print-directory
+.DEFAULT_GOAL := all
 
 # ========================================================== #
 secure:
@@ -14,16 +15,8 @@ secure:
 -include srcs/.env
 
 all: secure
-	@mkdir -p $(DATA_PATH)/mariadb # because host dir must exist before docker starts
-	@mkdir -p $(DATA_PATH)/wordpress # because host dir must exist before docker starts
-	@printf "\n$(RED)===*^* 1. Composition of Docker will launch in ... *^*===$(RESET)\n\n"
-	@sleep 1
-	@echo "3..."
-	@sleep 1
-	@echo "2..."
-	@sleep 1
-	@echo "1..."
-	@sleep 1
+	@sudo mkdir -p $(DATA_PATH)/mariadb
+	@sudo mkdir -p $(DATA_PATH)/wordpress
 	docker compose -f srcs/docker-compose.yml up -d --build
 
 re :
@@ -44,9 +37,6 @@ start:
 	@echo "Starting existing containers without rebuilding..."
 	@docker compose -f srcs/docker-compose.yml start
 
-instructions:
-	./instructions.sh;
-# REMOVE this last one after DEVELOPPING !!!
 
 #### -------- DIAGNOSIS --------  ####
 
