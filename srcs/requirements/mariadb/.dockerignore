@@ -1,7 +1,7 @@
 srcs/.env
 .git
 .gitignore
-*.md
+srcs/*.md
 *.tar.gz
 secrets/
 
