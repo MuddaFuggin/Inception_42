@@ -38,6 +38,10 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
         --admin_password="${WP_ADMIN_PASSWORD}" \
         --admin_email="${WP_ADMIN_EMAIL}"
 
+ # Contournement NAT
+    wp config set WP_HOME "https://${DOMAIN_NAME}:4443" --allow-root
+    wp config set WP_SITEURL "https://${DOMAIN_NAME}:4443" --allow-root
+
     echo "Création d'un utilisateur supplémentaire..."
     wp user create --allow-root \
         "${WP_USER}" "${WP_EMAIL}" \

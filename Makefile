@@ -41,7 +41,7 @@ start:
 #### -------- DIAGNOSIS --------  ####
 
 check:
-	@read -p "Type one of those : [log] [status] [volumes] [user] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
+	@read -p "Type one of those : [browsercmd] [log] [status] [volumes] [user] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
@@ -96,6 +96,9 @@ check:
 			esac ;; \
 		ip) \
 			echo "\n" ; hostname -I ; echo "\n" ; make check ;; \
+		browsercmd) \
+			echo 'google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" https://csimonne.42.fr:4443/wp-admin/' ;\
+			echo "\n Please only launch on Hypervisor's bash. \n" ;; \
 		exit) \
 			exit 0 ;; \
 		clear) \
