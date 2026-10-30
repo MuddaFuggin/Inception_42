@@ -1,3 +1,0 @@
-hostname -I (first part)
-google-chrome --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" https://csimonne.42.fr:4443
---launch on Hypervisor's bash.

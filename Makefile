@@ -30,13 +30,16 @@ down:
 #### -------- PLAY/PAUSE --------  ####
 
 stop:
-	@echo "Stopping containers (preserving state and network)..."
+	@echo "Stopping containers (preserving state, named volumes and network)..."
 	@docker compose -f srcs/docker-compose.yml stop
 
 start:
 	@echo "Starting existing containers without rebuilding..."
 	@docker compose -f srcs/docker-compose.yml start
 
+restart :
+	@echo "Stopping and restarting containers (preserving state, named volumes and network)..."
+	@docker compose -f srcs/docker-compose.yml restart
 
 #### -------- DIAGNOSIS --------  ####
 
@@ -94,11 +97,11 @@ check:
 				*) \
 					echo "$(RED)\n wrong command, try again or type : exit \n $(RESET)" ; make check ;; \
 			esac ;; \
+		httptest) \
+			curl -I http://csimonne.42.fr ; \
+			curl -kI https://csimonne.42.fr ;; \
 		ip) \
 			echo "\n" ; hostname -I ; echo "\n" ; make check ;; \
-		browsercmd) \
-			echo 'google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" https://csimonne.42.fr:4443/wp-admin/' ;\
-			echo "\n Please only launch on Hypervisor's bash. \n" ;; \
 		exit) \
 			exit 0 ;; \
 		clear) \
