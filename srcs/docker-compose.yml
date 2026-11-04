@@ -1,4 +1,4 @@
-# declaration et configuration des services.
+# declaration and configuration of services.
 
 services:
 
@@ -68,7 +68,7 @@ services:
       - inception_net
 
 
-# declaration et configuration des volumes.
+# declaration and configuration of volumes.
 
 volumes:   
 
@@ -89,7 +89,7 @@ volumes:
       device: /home/csimonne/data/wordpress
 
 
-# declaration et configuration des networks.
+# declaration and configuration of networks.
 
 networks:
 
@@ -98,7 +98,7 @@ networks:
     driver: bridge
 
 
-# declaration des secrets.
+# declaration of secrets.
 
 secrets:
 
