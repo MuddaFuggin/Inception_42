@@ -1,0 +1,7 @@
+srcs/.env
+secrets/
+/**/*.md
+
+!/README.md
+!/USER_DOC.md
+!/DEV_DOC.md

@@ -1,0 +1,7 @@
+srcs/.env
+.git
+.gitignore
+*.md
+*.tar.gz
+secrets/
+
