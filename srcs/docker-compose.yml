@@ -25,7 +25,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    image: wordpress:42
+    image: wordpress
     container_name: wordpress
     restart: always
     depends_on:
@@ -53,7 +53,7 @@ services:
 
   nginx:
     build: ./requirements/nginx
-    image: nginx:42
+    image: nginx
     container_name: nginx
     restart: always
     ports:
