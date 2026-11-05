@@ -11,10 +11,17 @@ secure:
 	@if [ -f srcs/.env ]; then chmod 600 srcs/.env; fi
 	@if ls secrets/*.txt 1>/dev/null 2>&1; then chmod 600 secrets/*.txt; fi
 
+check-env:
+	@if grep -E '^(WP_ADMIN_USER|WP_ADMIN_EMAIL)=' .env | \
+		grep -Eqi '=($|.*admin|WP_ADMIN_USER$|WP_ADMIN_EMAIL$)'; then \
+		echo "Error: Forbidden or empty admin values detected in .env"; \
+		exit 1; \
+	fi
+
 # for data path
 -include srcs/.env
 
-all: secure
+all: secure check-env
 	@sudo mkdir -p $(DATA_PATH)/mariadb
 	@sudo mkdir -p $(DATA_PATH)/wordpress
 	docker compose -f srcs/docker-compose.yml up -d --build
