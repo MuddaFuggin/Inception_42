@@ -13,7 +13,7 @@ To compile, install, and execute this project:
 
 ##### Prerequisites :
 
-You could follow the instructions below to set up and run the infrastructure on your own hypervisor, provided that _docker_ and _docker compose_ are installed. However, the original developpement environnement consists of a Virtual Machine with Debian Bookworm installed (without a graphical interface).
+You could follow the instructions below to set up and run the infrastructure on your own hypervisor, provided that _docker_ and _docker compose_ are installed. However, the original developement environement consists of a Virtual Machine with Debian Bookworm installed (without a graphical interface).
 
 To reproduce this environment, you can set up your own Linux Virtual Machine with the following configuration : (note that in the context of a 42 school evaluation, the ready-made .ova file will be provided)
 
@@ -28,7 +28,7 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 ##### Configuration :
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
-
+(access : `cd ./Inception_42/srcs && ls -la`)
 2. Create your local passwords as text files inside the `secrets/` directory. Use this blueprint :
 
 ```bash
