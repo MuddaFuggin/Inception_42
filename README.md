@@ -28,7 +28,7 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 ##### Configuration :
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
-(access : `cd ./Inception_42/srcs && ls -la`)
+(access : `cd ~/Inception_42/srcs && ls -la`)
 2. Create your local passwords as text files inside the `secrets/` directory. Use this blueprint :
 
 ```bash
