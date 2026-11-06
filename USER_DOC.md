@@ -19,7 +19,7 @@ _To comply with strict security requirements, no passwords or sensitive data are
 
 To compile, install, and execute this project:
 
-##### Prerequisites :
+#### Prerequisites :
 
 You could follow the instructions below to set up and run the infrastructure on your own hypervisor, provided that _docker_ and _docker compose_ are installed. However, the original development environment consists of a Virtual Machine with Debian Bookworm installed (without a graphical interface).
 
@@ -33,7 +33,7 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 
 - Launch Debian on your VM.
 
-##### Configuration :
+#### Configuration :
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
 (access : `cd ~/Inception_42/srcs && ls -la`, create _.env_ and modify it : `cp .env.example .env`)
@@ -46,16 +46,16 @@ echo "my_admin_password" > ~/Inception_42/secrets/wp_admin_password.txt
 echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 ```
 
-**Note:** 
+*Note:* 
 - Never commit .env or the contents of secrets/ to a public repository. Keep them private and properly excluded through .gitignore.
 
-##### Installation and launch : 
+#### Installation and launch : 
 
 Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
 
 ### User Commands :
 
-##### Starting, stopping :
+#### Starting, stopping :
 
 *All of those commands has to be launched from the folder containing the _Makefile_ file.*
 
@@ -64,7 +64,7 @@ Run `make` at the root of the repository : it will prepare the host directories,
 * Command `make restart` is an alias for `make stop` + `make start`.
 Tips :The commands above can be used for maintenance purposes and to test data persistence.
 
-##### Different levels of stopping + cleaning (use with care !) :
+#### Different levels of stopping + cleaning (use with care !) :
 
 * `make down` : Stops and removes all project containers and the associated Docker network. Docker destroys the virtual network interfaces and bridge associated with that network. Named volumes and bind-mounted host data are preserved.
 * `make clean` : Equivalent to make down + removes the Compose-managed named volumes (docker compose down -v). In our configuration, the Docker volume is removed, but the underlying host directory (/home/csimonne/data/mariadb) and its data are preserved.
@@ -77,7 +77,7 @@ Warning: This last command permanently deletes the persistent database and WordP
 
 _disclaimer : A security warning will appear due to the self-signed SSL/TLS certificate, which is expected._
 
-##### With this particular 'headless' Linux Debian setup :
+#### With this particular 'headless' Linux Debian setup :
 
 Due to the limitations of this development environment (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
 
@@ -87,9 +87,9 @@ Due to the limitations of this development environment (no graphical interface),
 	For administration panel :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/wp-admin/"`   
 
-**Note:** You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
+*Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
-##### Accessing the website from a graphical Debian setup :
+#### Accessing the website from a graphical Debian setup :
 
 If your Debian VM already has a graphical environment and a web browser installed, only a few steps are required:
 
@@ -100,10 +100,10 @@ If your Debian VM already has a graphical environment and a web browser installe
    - `https://csimonne.42.fr/`
    - `https://csimonne.42.fr/wp-admin/`
 
-**Note:** This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
+*Note:* This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
 
 
-##### Various available tests
+#### Various available tests
 
 _Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. type `clear` to clear your entries or `exit` to go back to bash._
 
