@@ -53,6 +53,9 @@ echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 
 Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
 
+****
+
+
 ### User Commands :
 
 #### Starting, stopping :
@@ -72,6 +75,7 @@ Tips :The commands above can be used for maintenance purposes and to test data p
 
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
+****
 
 ### Access the website : 
 
@@ -102,8 +106,9 @@ If your Debian VM already has a graphical environment and a web browser installe
 
 *Note:* This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
 
+****
 
-#### Various available tests
+### Various available tests
 
 _Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. type `clear` to clear your entries or `exit` to go back to bash._
 
