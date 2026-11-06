@@ -3,14 +3,12 @@
 • USER_DOC.md — User documentation This file must explain, in clear and simple
 terms, how an end user or administrator can:
 
-◦ Start and stop the project.
 ◦ Access the website and the administration panel.
 ◦ Locate and manage credentials.
 ◦ Check that the services are running correctly.
 
 
 ## Description (Understand what services are provided by the stack.)
-
 
 
 ## Instructions
@@ -66,9 +64,7 @@ Tips :The commands above can be used for maintenance purposes and to test data p
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
 
-## Basic usage :
-
-Access the website :  
+## Access the website :  
 Due to the limitations of the development environment (headless VM, lack of sudo privileges on the physical machine), if you are testing from a campus 42's computer, you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :  
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/wp-admin/"`   
 
@@ -94,41 +90,6 @@ Type the following for some interesting tests :
 - `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used..
 - `log` : Displays the real-time execution logs for the NGINX, MariaDB, or WordPress containers.
 - `wp` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS).
-
-
-## Resources
-
-* Official documentation:
-  - [Docker](https://docs.docker.com/)
-  - [NGINX](https://nginx.org/en/docs/)
-  - [MariaDB](https://mariadb.org/documentation/)
-  - [WordPress](https://wordpress.org/documentation/)  
-
-* Project guide / tutorial :   
-https://devabdilah.medium.com/  
-https://inception-42-a-comprehensive-guide-to-dockerizing-your-first-infrastructure-part-iii-a10e93e9d922
-
-* AI Usage:  Artificial Intelligence was used to assist in structuring the project. Also, it was used as a step by step tutorial, to adapt some commands, find some execution scripts, ask questions and understand.
-
-
-## Design specifications and choices
-
-**Docker Usage & Design Choices:**
-Docker is utilized to containerize applications at the OS level, sharing the host's kernel instead of virtualizing hardware. This project employs a modular design where each service relies on custom initialization scripts (`entrypoint.sh`) to prepare the environment (as well as ensuring the main process remains in the foreground as PID 1).
-
-* **Virtual Machines vs Docker:** Virtual Machines run a full guest operating system on top of virtualized hardware, making them heavy and resource-intensive. Docker containerizes applications at the OS level, sharing the host's kernel, which makes it significantly faster and more lightweight.
-
-* **Secrets vs Environment Variables:** Environment variables are useful for general configuration (like domain names) but can be exposed if the container environment is inspected (via 'docker inspect' for instance, or through child process's error logs). Docker Secrets are used for sensitive data (like database passwords) because they are securely mounted directly into temporary files, keeping them hidden from the standard environment.
-
-* **Docker Network vs Host Network:** Using the host network shares the host machine's network stack directly, which lacks isolation. This project uses a custom Docker Network to create an isolated internal bridge where containers communicate securely using internal DNS, exposing only port 443 to the outside world.
-
-* **Docker Volumes vs Bind Mounts:** Bind mounts map a physical directory from the host directly into a container, while Docker Volumes are entirely managed by Docker within its internal storage. To satisfy the project's requirement of storing data physically in _/home/csimonne/data_, this infrastructure uses Named Volumes with a local driver pointing explicitly to the host's bind path, ensuring persistent data even if containers are destroyed.
-
-
-
-
-
-
 
 
 
