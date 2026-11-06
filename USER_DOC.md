@@ -1,15 +1,16 @@
 *This project has been created as part of the 42 curriculum by csimonne.*
 
-• USER_DOC.md — User documentation This file must explain, in clear and simple
-terms, how an end user or administrator can:
+## Description (Understand what services are provided by the stack)
 
-◦ Locate and manage credentials.
-◦ Check that the services are running correctly.
+This infrastructure provides a fully functional WordPress website backed by a secure and isolated stack. The system runs inside a Debian Virtual Machine and is composed of three dedicated Docker containers:
 
+* NGINX: The web server that acts as the sole secure entry point, receiving all external HTTPS requests.
 
-### Description (Understand what services are provided by the stack)
+* WordPress: The application container that executes the PHP code to run the website.
 
-....
+* MariaDB: The database container responsible for SQL storage, containing all user accounts and site data.
+
+_To comply with strict security requirements, no passwords or sensitive data are stored in plain text within the .env file or configuration scripts. Instead, all database and administrator credentials are securely managed using Docker Secrets. These secrets are stored locally on the host and injected directly into the containers' memory (at /run/secrets/) at runtime, ensuring they remain completely isolated, hidden, and never exposed in the repository._
 
 ### Instructions
 
@@ -42,10 +43,12 @@ echo "my_admin_password" > ~/Inception_42/secrets/wp_admin_password.txt
 echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 ```
 
+**Note:** 
+- Never commit .env or the contents of secrets/ to a public repository. Keep them private and properly excluded through .gitignore.
+
 ##### Installation and launch : 
 
 Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
-
 
 ### User Commands :
 
@@ -65,11 +68,6 @@ Tips :The commands above can be used for maintenance purposes and to test data p
 * `make fclean` : Equivalent to make clean + all eligible unused resources (images, unused misc containers, unused networks, build cache) + deletes the contents of the host data directory using rm -rf $(DATA_PATH)*.
 
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
-
-
-##### More useful commands :
-
-...
 
 
 ### Access the website : 
@@ -104,17 +102,26 @@ If your Debian VM already has a graphical environment and a web browser installe
 
 ##### Various available tests
 
-Run `make check` at the root of the repository. It gives you access to various options. type `clear` to clear your entries or `exit` to go back to bash.
+_Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. type `clear` to clear your entries or `exit` to go back to bash._
 
 Type the following for some interesting tests :
 
-- `status` : Checks which processes are _up_ and running.
-- `volumes` : Displays the Docker volume configurations and lists the physical persistent files currently stored on the host machine.
-- `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
-- `images` : Displays local Docker image information.
-- `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used..
+- `status` : Checks which processes are _up_ and running (PID1). You can also witness Network isolation of Wordpress and MariaDb.
 - `log` : Displays the real-time execution logs for the NGINX, MariaDB, or WordPress containers.
-- `wp` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS).
+- `volumes` : Displays the Docker volume configurations and lists the physical persistent files currently stored on the host machine.
+- `images` : Displays local Docker image information.
+- `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used.
+- `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
+- `wp` > `security` : displays TLS status.
+- `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
+
+And many more...
+
+
+
+
+
+
 
 
 
