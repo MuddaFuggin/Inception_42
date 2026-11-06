@@ -12,6 +12,8 @@ This infrastructure provides a fully functional WordPress website backed by a se
 
 _To comply with strict security requirements, no passwords or sensitive data are stored in plain text within the .env file or configuration scripts. Instead, all database and administrator credentials are securely managed using Docker Secrets. These secrets are stored locally on the host and injected directly into the containers' memory (at /run/secrets/) at runtime, ensuring they remain completely isolated, hidden, and never exposed in the repository._
 
+****
+
 ### Instructions
 
 To compile, install, and execute this project:
@@ -34,7 +36,7 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
 (access : `cd ~/Inception_42/srcs && ls -la`, create _.env_ and modify it : `cp .env.example .env`)
-2. Create your local passwords as text files inside the `secrets/` directory. To do so, use the following blueprint and add your personal credentials in place of ["my_db_password"]. Once edited, submit it in bash.
+2. Create your local passwords as text files inside the `secrets/` directory. To do so, use the following blueprint and add your personal credentials in place of ["my_db_password"] and the 3 other credentials. Once edited, submit it in bash.
 
 ```bash
 echo "my_db_password" > ~/Inception_42/secrets/db_password.txt 
