@@ -45,7 +45,7 @@ restart :
 #### -------- DIAGNOSIS --------  ####
 
 check:
-	@read -p "Type one of those : [browsercmd] [log] [status] [volumes] [user] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
+	@read -p "Type one of those : [log] [status] [volumes] [user] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
@@ -78,7 +78,7 @@ check:
 		versions) \
 			echo "\n" ; grep -i "FROM" srcs/requirements/*/Dockerfile ; echo "\n" ; make check ;; \
 		wp) \
-			read -p "Type [user] [homepage] [adminpage] [http] [tls] or [back]: " ans; \
+			read -p "Type [user] [homepage] [adminpage] [httptest] [security] or [back]: " ans; \
 			case "$${ans:-N}" in \
 				user) \
 					echo "\n" ; docker exec -it wordpress whoami; \
@@ -87,9 +87,14 @@ check:
 					echo "\n https://csimonne.42.fr\n" ; make check ;; \
 				adminpage) \
 					echo "\n https://csimonne.42.fr/wp-admin" ; make check ;; \
-				http) \
-					curl -kI https://csimonne.42.fr ; make check ;; \
-				tls) \
+				httptest) \
+					printf "\n" ; \
+					printf "\n==== Testing :  -kI http://csimonne.42.fr ====\n\n" ; \
+					curl -I http://csimonne.42.fr ; \
+					printf "\n==== Testing :  -kI https://csimonne.42.fr ====\n\n" ; \
+					curl -kI https://csimonne.42.fr ;; \
+				security) \
+					echo "==== Checking TLS status : ====" ; \
 					curl -kv https://csimonne.42.fr 2>&1 | grep -i "SSL connection using TLSv" ; make check ;; \
 				back) \
 					make check ;; \
@@ -98,9 +103,6 @@ check:
 				*) \
 					echo "$(RED)\n wrong command, try again or type : exit \n $(RESET)" ; make check ;; \
 			esac ;; \
-		httptest) \
-			curl -I http://csimonne.42.fr ; \
-			curl -kI https://csimonne.42.fr ;; \
 		ip) \
 			echo "\n" ; hostname -I ; echo "\n" ; make check ;; \
 		tcpports) \
