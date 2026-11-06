@@ -73,16 +73,16 @@ check:
 			ls -la $(DATA_PATH)/wordpress ; make check ;; \
 		status) \
 			echo "\n" ; docker compose -f srcs/docker-compose.yml ps ; echo "\n" ; make check ;; \
-		user) \
-			echo "\n" ; docker exec -it wordpress whoami; \
-			docker compose -f srcs/docker-compose.yml exec wordpress wp user list --allow-root --path=/var/www/html ; make check ;; \
 		images) \
 			docker images ; make check ;; \
 		versions) \
 			echo "\n" ; grep -i "FROM" srcs/requirements/*/Dockerfile ; echo "\n" ; make check ;; \
 		wp) \
-			read -p "Type [homepage] [adminpage] [http] [tls] or [back]: " ans; \
+			read -p "Type [user] [homepage] [adminpage] [http] [tls] or [back]: " ans; \
 			case "$${ans:-N}" in \
+				user) \
+					echo "\n" ; docker exec -it wordpress whoami; \
+					docker compose -f srcs/docker-compose.yml exec wordpress wp user list --allow-root --path=/var/www/html ; make check ;; \
 				homepage) \
 					echo "\n https://csimonne.42.fr\n" ; make check ;; \
 				adminpage) \
