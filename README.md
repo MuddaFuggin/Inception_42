@@ -32,10 +32,10 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 2. Create your local passwords as text files inside the `secrets/` directory. Use this blueprint :
 
 ```bash
-echo "my_db_password" > secrets/db_password.txt 
-echo "my_root_password" > secrets/db_root_password.txt 
-echo "my_admin_password" > secrets/wp_admin_password.txt 
-echo "my_user_password" > secrets/wp_password.txt
+echo "my_db_password" > ~/Inception_42/secrets/db_password.txt 
+echo "my_root_password" > ~/Inception_42/secrets/db_root_password.txt 
+echo "my_admin_password" > ~/Inception_42/secrets/wp_admin_password.txt 
+echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 ```
 
 ##### Basic Usage 
