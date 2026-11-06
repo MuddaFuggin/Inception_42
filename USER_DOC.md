@@ -1,4 +1,4 @@
-# "Welcome to the user documentation for your Docker-powered WordPress infrastructure."
+# "Welcome to the user documentation for your Docker-powered WordPress infrastructure !"
 
 ### A brief Description of the services provided by the stack :
 
