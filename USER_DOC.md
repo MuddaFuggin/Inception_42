@@ -85,10 +85,10 @@ _disclaimer : A security warning will appear due to the self-signed SSL/TLS cert
 
 Due to the limitations of this development environment (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
 
-	For the website :
+* For the website :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/"`   
 
-	For administration panel :
+* For administration panel :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/wp-admin/"`   
 
 *Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
