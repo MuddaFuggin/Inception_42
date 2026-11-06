@@ -1,6 +1,6 @@
 *This project has been created as part of the 42 curriculum by csimonne.*
 
-## Description (Understand what services are provided by the stack)
+### Description of the services provided by the stack :
 
 This infrastructure provides a fully functional WordPress website backed by a secure and isolated stack. The system runs inside a Debian Virtual Machine and is composed of three dedicated Docker containers:
 
