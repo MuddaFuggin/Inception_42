@@ -1,7 +1,6 @@
-*This project has been created as part of the 42 curriculum by csimonne.*  
+# "Welcome to the user documentation for your Docker-powered WordPress infrastructure."
 
-
-### Description of the services provided by the stack :
+### A brief Description of the services provided by the stack :
 
 This infrastructure provides a fully functional WordPress website backed by a secure and isolated stack. The system runs inside a Debian Virtual Machine and is composed of three dedicated Docker containers:
 
@@ -15,25 +14,8 @@ _To comply with strict security requirements, no passwords or sensitive data are
 
 ****
 
-### Instructions
 
-To compile, install, and execute this project:
-
-#### Prerequisites :
-
-You could follow the instructions below to set up and run the infrastructure on your own hypervisor, provided that _docker_ and _docker compose_ are installed. However, the original development environment consists of a Virtual Machine with Debian Bookworm installed (without a graphical interface).
-
-To reproduce this environment, you can set up your own Linux Virtual Machine with the following configuration : (note that in the context of a 42 school evaluation, the ready-made .ova file will be provided).
-
-- Install Docker and Docker Compose.
-- Configure your VM's port forwarding rules:
-        HTTPS: TCP, host port 4443 → guest port 443.
-	- For convenience, you can also access your VM through SSH :  
-        SSH: TCP, host port 2222 → guest port 22.
-
-- Launch Debian on your VM.
-
-#### Configuration :
+#### Your First Launch :
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
 (access : `cd ~/Inception_42/srcs && ls -la`, create _.env_ and modify it : `cp .env.example .env`)
@@ -45,20 +27,9 @@ echo "my_root_password" > ~/Inception_42/secrets/db_root_password.txt
 echo "my_admin_password" > ~/Inception_42/secrets/wp_admin_password.txt 
 echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 ```
+3. Run `make` at the root of the repository : it will prepare the infrastructure. When done, your engine is running !.
 
-*Note:* 
-- Never commit .env or the contents of secrets/ to a public repository. Keep them private and properly excluded through .gitignore.
-
-#### Installation and launch : 
-
-Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
-
-****
-
-
-### User Commands :
-
-#### Starting, stopping :
+#### Basic commands > starting, stopping :
 
 *All of those commands has to be launched from the folder containing the _Makefile_ file.*
 
