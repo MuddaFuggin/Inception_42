@@ -110,7 +110,7 @@ If your Debian VM already has a graphical environment and a web browser installe
 
 ### Various available tests
 
-_Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. type `clear` to clear your entries or `exit` to go back to bash._
+_Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. Type `clear` to clear your entries or `exit` to go back to bash._
 
 Type the following for some interesting tests :
 
