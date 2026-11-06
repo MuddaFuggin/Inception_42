@@ -1,4 +1,5 @@
-*This project has been created as part of the 42 curriculum by csimonne.*
+*This project has been created as part of the 42 curriculum by csimonne.*  
+
 
 ### Description of the services provided by the stack :
 
