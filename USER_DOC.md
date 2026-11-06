@@ -1,25 +1,29 @@
-*This project has been created as part of the 42 curriculum by csimonne.*
-
-• USER_DOC.md — User documentation This file must explain, in clear and simple
-terms, how an end user or administrator can:
-
-◦ Locate and manage credentials.
-◦ Check that the services are running correctly.
+*This project has been created as part of the 42 curriculum by csimonne.*  
 
 
-## Description (Understand what services are provided by the stack.)
+### Description of the services provided by the stack :
 
-....
+This infrastructure provides a fully functional WordPress website backed by a secure and isolated stack. The system runs inside a Debian Virtual Machine and is composed of three dedicated Docker containers:
 
-## Instructions
+* NGINX: The web server that acts as the sole secure entry point, receiving all external HTTPS requests.
+
+* WordPress: The application container that executes the PHP code to run the website.
+
+* MariaDB: The database container responsible for SQL storage, containing all user accounts and site data.
+
+_To comply with strict security requirements, no passwords or sensitive data are stored in plain text within the .env file or configuration scripts. Instead, all database and administrator credentials are securely managed using Docker Secrets. These secrets are stored locally on the host and injected directly into the containers' memory (at /run/secrets/) at runtime, ensuring they remain completely isolated, hidden, and never exposed in the repository._
+
+****
+
+### Instructions
 
 To compile, install, and execute this project:
 
-##### Prerequisites :
+#### Prerequisites :
 
 You could follow the instructions below to set up and run the infrastructure on your own hypervisor, provided that _docker_ and _docker compose_ are installed. However, the original development environment consists of a Virtual Machine with Debian Bookworm installed (without a graphical interface).
 
-To reproduce this environment, you can set up your own Linux Virtual Machine with the following configuration : (note that in the context of a 42 school evaluation, the ready-made .ova file will be provided)
+To reproduce this environment, you can set up your own Linux Virtual Machine with the following configuration : (note that in the context of a 42 school evaluation, the ready-made .ova file will be provided).
 
 - Install Docker and Docker Compose.
 - Configure your VM's port forwarding rules:
@@ -29,11 +33,11 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 
 - Launch Debian on your VM.
 
-##### Configuration :
+#### Configuration :
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
 (access : `cd ~/Inception_42/srcs && ls -la`, create _.env_ and modify it : `cp .env.example .env`)
-2. Create your local passwords as text files inside the `secrets/` directory. Use this blueprint :
+2. Create your local passwords as text files inside the `secrets/` directory. To do so, use the following blueprint and add your personal credentials in place of ["my_db_password"] and the 3 other credentials. Once edited, submit it in bash.
 
 ```bash
 echo "my_db_password" > ~/Inception_42/secrets/db_password.txt 
@@ -42,14 +46,19 @@ echo "my_admin_password" > ~/Inception_42/secrets/wp_admin_password.txt
 echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 ```
 
-##### Installation and launch : 
+*Note:* 
+- Never commit .env or the contents of secrets/ to a public repository. Keep them private and properly excluded through .gitignore.
+
+#### Installation and launch : 
 
 Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
 
+****
 
-## User Commands :
 
-##### Starting, stopping :
+### User Commands :
+
+#### Starting, stopping :
 
 *All of those commands has to be launched from the folder containing the _Makefile_ file.*
 
@@ -58,7 +67,7 @@ Run `make` at the root of the repository : it will prepare the host directories,
 * Command `make restart` is an alias for `make stop` + `make start`.
 Tips :The commands above can be used for maintenance purposes and to test data persistence.
 
-##### Different levels of stopping + cleaning (use with care !) :
+#### Different levels of stopping + cleaning (use with care !) :
 
 * `make down` : Stops and removes all project containers and the associated Docker network. Docker destroys the virtual network interfaces and bridge associated with that network. Named volumes and bind-mounted host data are preserved.
 * `make clean` : Equivalent to make down + removes the Compose-managed named volumes (docker compose down -v). In our configuration, the Docker volume is removed, but the underlying host directory (/home/csimonne/data/mariadb) and its data are preserved.
@@ -66,123 +75,52 @@ Tips :The commands above can be used for maintenance purposes and to test data p
 
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
+****
 
-##### More useful commands :
-
-...
-
-
-## Access the website : 
+### Access the website : 
 
 _disclaimer : A security warning will appear due to the self-signed SSL/TLS certificate, which is expected._
 
-##### With this particular 'headless' Linux Debian setup :
+#### With this particular 'headless' Linux Debian setup :
 
 Due to the limitations of this development environment (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
 
-	For the website :
+* For the website :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/"`   
 
-	For administration panel :
+* For administration panel :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/wp-admin/"`   
 
-**Note:** You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
+*Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
-### Accessing the website from a graphical Debian setup :
+#### Accessing the website from a graphical Debian setup :
 
 If your Debian VM already has a graphical environment and a web browser installed, only a few steps are required:
 
 1. Find your VM's IP address: `ip addr`.
-2. Add your domain name to /etc/hosts, typing 'sudo vim /etc/hosts', and add this line :
-   [YOUR_IP]    csimonne.42.fr
+2. Add your domain name to `/etc/hosts`, typing `sudo vim /etc/hosts`, and adding this line :  
+   `[YOUR_IP] csimonne.42.fr`
 3. Open your browser inside the VM and visit:
    - `https://csimonne.42.fr/`
    - `https://csimonne.42.fr/wp-admin/`
 
-**Note:** This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
+*Note:* This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
 
+****
 
-##### Various available tests
+### Various available tests
 
-Run `make check` at the root of the repository. It gives you access to various options. type `clear` to clear your entries or `exit` to go back to bash.
+_Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. Type `clear` to clear your entries or `exit` to go back to bash._
 
 Type the following for some interesting tests :
 
-- `status` : Checks which processes are _up_ and running.
-- `volumes` : Displays the Docker volume configurations and lists the physical persistent files currently stored on the host machine.
-- `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
-- `images` : Displays local Docker image information.
-- `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used..
+- `status` : Checks which processes are _up_ and running (PID1). You can also witness Network isolation of Wordpress and MariaDb.
 - `log` : Displays the real-time execution logs for the NGINX, MariaDB, or WordPress containers.
-- `wp` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS).
+- `volumes` : Displays the Docker volume configurations and lists the physical persistent files currently stored on the host machine.
+- `images` : Displays local Docker image information.
+- `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used.
+- `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
+- `wp` > `security` : displays TLS status.
+- `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### WHAAAAAAAAAAAAAAAAAAAAAAAAAAAAT
-echo "mon_mot_de_passe_db" > secrets/db_password.txt 
-echo "mon_root_password" > secrets/db_root_password.txt 
-echo "mon_admin_password" > secrets/wp_admin_password.txt 
-echo "mon_user_password" > secrets/wp_password.txt
-
-
-
-
-make down  = 
-docker compose -f srcs/docker-compose.yml down 
-
-=
-
-removing all containers
-
-[+] down 4/4
- ✔ Container nginx       Removed                                                                                                               4.2s
- ✔ Container wordpress   Removed                                                                                                               3.9s
- ✔ Container mariadb     Removed                                                                                                               5.1s
- ✔ Network inception_net Removed
-
-
-
-
-
- make clean =
-  docker compose -f srcs/docker-compose.yml down -v
-
-=
-
-removing allc ontainers AND volumes
-
-
- ✔ Volume mariadb_data   Removed                                                                                                               0.2s
- ✔ Volume wordpress_data Removed   
-
-
- make fclean = clean !
-
- +
-
- 	docker system prune -af
-	sudo rm -rf $(DATA_PATH)
-
-
-la ligne 'prune' =
-
-supprime les :
-Conteneurs arrêtés / Images Docker non utilisées / Réseaux inutilisés / Cache de build
+And many more...
