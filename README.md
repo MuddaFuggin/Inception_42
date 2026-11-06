@@ -83,7 +83,7 @@ Type the following for some interesting tests :
 https://devabdilah.medium.com/  
 https://inception-42-a-comprehensive-guide-to-dockerizing-your-first-infrastructure-part-iii-a10e93e9d922
 
-* AI Usage:  Artificial Intelligence was used to assist in structuring the project : as a step by step tutorial, to adapt some commands, find some execution scripts, understand concepts and ask questions.
+* AI Usage:  Artificial Intelligence was used to assist in structuring the project. Also, it was used as a step by step tutorial, to adapt some commands, find some execution scripts, ask questions and understand.
 
 
 ## Design specifications and choices
