@@ -3,13 +3,13 @@
 • USER_DOC.md — User documentation This file must explain, in clear and simple
 terms, how an end user or administrator can:
 
-◦ Access the website and the administration panel.
 ◦ Locate and manage credentials.
 ◦ Check that the services are running correctly.
 
 
 ## Description (Understand what services are provided by the stack.)
 
+....
 
 ## Instructions
 
@@ -46,7 +46,10 @@ echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 
 Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
 
-## Starting, stopping :
+
+## User Commands :
+
+##### Starting, stopping :
 
 *All of those commands has to be launched from the folder containing the _Makefile_ file.*
 
@@ -55,7 +58,7 @@ Run `make` at the root of the repository : it will prepare the host directories,
 * Command `make restart` is an alias for `make stop` + `make start`.
 Tips :The commands above can be used for maintenance purposes and to test data persistence.
 
-## Different levels of stopping + cleaning (use with care !) :
+##### Different levels of stopping + cleaning (use with care !) :
 
 * `make down` : Stops and removes all project containers and the associated Docker network. Docker destroys the virtual network interfaces and bridge associated with that network. Named volumes and bind-mounted host data are preserved.
 * `make clean` : Equivalent to make down + removes the Compose-managed named volumes (docker compose down -v). In our configuration, the Docker volume is removed, but the underlying host directory (/home/csimonne/data/mariadb) and its data are preserved.
@@ -64,17 +67,39 @@ Tips :The commands above can be used for maintenance purposes and to test data p
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
 
-## Access the website :  
-Due to the limitations of the development environment (headless VM, lack of sudo privileges on the physical machine), if you are testing from a campus 42's computer, you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :  
+##### More useful commands :
+
+...
+
+
+## Access the website : 
+
+_disclaimer : A security warning will appear due to the self-signed SSL/TLS certificate, which is expected._
+
+##### With this particular 'headless' Linux Debian setup :
+
+Due to the limitations of this development environment (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
+
+	For the website :
+`google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/"`   
+
+	For administration panel :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/wp-admin/"`   
 
-	If it does not work, try clearing your browser's navigation history and cookies.  
+**Note:** You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
-		Note: You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
- 
-	_However_, if you have configured a graphical interface and a browser directly inside your VM, simply navigate to the standard URL without the forwarded port: `https://csimonne.42.fr/`
+### Accessing the website from a graphical Debian setup :
 
-		disclaimer : In both cases, a security warning will appear due to the self-signed SSL/TLS certificate, which is expected.
+If your Debian VM already has a graphical environment and a web browser installed, only a few steps are required:
+
+1. Find your VM's IP address: `ip addr`.
+2. Add your domain name to /etc/hosts, typing 'sudo vim /etc/hosts', and add this line :
+   [YOUR_IP]    csimonne.42.fr
+3. Open your browser inside the VM and visit:
+   - `https://csimonne.42.fr/`
+   - `https://csimonne.42.fr/wp-admin/`
+
+**Note:** This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
 
 
 ##### Various available tests
