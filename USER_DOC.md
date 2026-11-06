@@ -7,11 +7,11 @@ terms, how an end user or administrator can:
 ◦ Check that the services are running correctly.
 
 
-## Description (Understand what services are provided by the stack.)
+### Description (Understand what services are provided by the stack)
 
 ....
 
-## Instructions
+### Instructions
 
 To compile, install, and execute this project:
 
@@ -19,7 +19,7 @@ To compile, install, and execute this project:
 
 You could follow the instructions below to set up and run the infrastructure on your own hypervisor, provided that _docker_ and _docker compose_ are installed. However, the original development environment consists of a Virtual Machine with Debian Bookworm installed (without a graphical interface).
 
-To reproduce this environment, you can set up your own Linux Virtual Machine with the following configuration : (note that in the context of a 42 school evaluation, the ready-made .ova file will be provided)
+To reproduce this environment, you can set up your own Linux Virtual Machine with the following configuration : (note that in the context of a 42 school evaluation, the ready-made .ova file will be provided).
 
 - Install Docker and Docker Compose.
 - Configure your VM's port forwarding rules:
@@ -33,7 +33,7 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 
 1. Ensure your environment variables are configured in `srcs/.env`.You can create your `.env` based on the `.env.example` provided.
 (access : `cd ~/Inception_42/srcs && ls -la`, create _.env_ and modify it : `cp .env.example .env`)
-2. Create your local passwords as text files inside the `secrets/` directory. Use this blueprint :
+2. Create your local passwords as text files inside the `secrets/` directory. To do so, use the following blueprint and add your personal credentials in place of ["my_db_password"]. Once edited, submit it in bash.
 
 ```bash
 echo "my_db_password" > ~/Inception_42/secrets/db_password.txt 
@@ -47,7 +47,7 @@ echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 Run `make` at the root of the repository : it will prepare the host directories, build the images, and _start the containers_ via *Docker Compose*.
 
 
-## User Commands :
+### User Commands :
 
 ##### Starting, stopping :
 
@@ -72,7 +72,7 @@ Warning: This last command permanently deletes the persistent database and WordP
 ...
 
 
-## Access the website : 
+### Access the website : 
 
 _disclaimer : A security warning will appear due to the self-signed SSL/TLS certificate, which is expected._
 
@@ -88,7 +88,7 @@ Due to the limitations of this development environment (no graphical interface),
 
 **Note:** You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
-### Accessing the website from a graphical Debian setup :
+##### Accessing the website from a graphical Debian setup :
 
 If your Debian VM already has a graphical environment and a web browser installed, only a few steps are required:
 
