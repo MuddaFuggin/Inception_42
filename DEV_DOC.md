@@ -122,6 +122,38 @@ Si l'évaluateur vous demande de prouver que votre infrastructure respecte le su
 "Cette ligne prouve que NGINX écoute sur le port public 443 (en IPv4 et IPv6) et transfère ce trafic de manière isolée à l'intérieur de son conteneur. Comme WordPress et MariaDB n'ont pas cette ligne, ils sont totalement invisibles depuis l'extérieur, ce qui valide la règle du point d'entrée unique."
 
 
+#### Alpine vs Debian
+
+* Alpine Linux
+Léger
+Environ 5 à 10 Mo pour l'image de base (selon la version).
+
+* Debian
+Polyvalent
+Image de base généralement autour de quelques dizaines de Mo.
+
+
+Caractéristique	                    Alpine	                Debian
+
+Taille    	                        Très petite	Plus         importante
+Gestionnaire de paquets	            apk	                     apt
+Base système                        musl libc	             glibc
+Shell par défaut	                /bin/sh (BusyBox)        /bin/sh (dash)
+Outils préinstallés	                Peu nombreux	         Plus nombreux
+Philosophie	                        Minimalisme	             Polyvalence
+
+Pourquoi utiliser Alpine ?
+
+L'idée est simple : un conteneur Docker n'a pas besoin d'être un système d'exploitation complet.
+Si ton conteneur sert uniquement à faire tourner Nginx, tu n'as pas forcément besoin de tous les outils et composants fournis par Debian.
+
+* Conclusion :
+  
+Alpine : intéressant pour comprendre le minimalisme des conteneurs et construire des images légères.
+
+Debian : intéressant pour travailler dans un environnement plus familier, avec davantage d'outils et une compatibilité logicielle généralement plus large.
+
+
 
 # Guide de Soutenance - Projet Inception 42
 
