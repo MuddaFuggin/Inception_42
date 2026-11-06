@@ -94,6 +94,33 @@ Je te conseille de retenir particulièrement ces trois notions :
 
 
 
+#### Afficher et dechiffrer le statut des ports docker.
+
+🔍 Interprétation du mapping de ports NGINX
+
+La ligne 0.0.0.0:443->443/tcp, [::]:443->443/tcp affichée lors d'un docker ps ou status est la preuve visuelle que votre pare-feu et votre point d'entrée sont correctement configurés pour le projet Inception.
+
+Voici comment la lire de gauche à droite :
+
+1. La partie IPv4 : 0.0.0.0:443->443/tcp
+
+0.0.0.0 : Cela représente toutes les adresses IPv4 de votre machine hôte (la VM). Cela signifie que le serveur écoute sur toutes ses interfaces réseau, prêt à recevoir des requêtes de l'extérieur.
+
+:443 (le premier) : C'est le port de la machine hôte (la VM) qui est ouvert au public.
+
+->443/tcp : C'est la redirection vers le conteneur. Tout le trafic TCP qui arrive sur le port 443 de la machine hôte est envoyé vers le port 443 interne de votre conteneur NGINX.
+
+2. La partie IPv6 : [::]:443->443/tcp
+
+[::] : C'est l'équivalent exact de 0.0.0.0, mais pour le protocole IPv6. NGINX est donc capable de recevoir du trafic moderne en IPv6.
+
+La redirection (->443/tcp) fonctionne de la même manière, envoyant le trafic vers le port 443 du conteneur.
+
+🎯 Que dire à l'évaluateur ?
+
+Si l'évaluateur vous demande de prouver que votre infrastructure respecte le sujet, montrez-lui cette ligne et expliquez :
+"Cette ligne prouve que NGINX écoute sur le port public 443 (en IPv4 et IPv6) et transfère ce trafic de manière isolée à l'intérieur de son conteneur. Comme WordPress et MariaDB n'ont pas cette ligne, ils sont totalement invisibles depuis l'extérieur, ce qui valide la règle du point d'entrée unique."
+
 
 
 # Guide de Soutenance - Projet Inception 42
