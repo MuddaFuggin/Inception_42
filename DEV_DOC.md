@@ -29,6 +29,11 @@ To reproduce this environment, you can set up your own Linux Virtual Machine wit
 (access : `cd ~/Inception_42/srcs && ls -la`, create _.env_ and modify it : `cp .env.example .env`)
 2. Create your local passwords as text files inside the `secrets/` directory. To do so, use the following blueprint and add your personal credentials in place of ["my_db_password"] and the 3 other credentials. Once edited, submit it in bash.
 
+
+*Note:* 
+- Never commit .env or the contents of secrets/ to a public repository. Keep them private and properly excluded through .gitignore.
+- You should use a strong password that does not contain the word 'admin', your name, or obvious sequences (e.g. 123456).
+
 ```bash
 echo "my_db_password" > ~/Inception_42/secrets/db_password.txt 
 echo "my_root_password" > ~/Inception_42/secrets/db_root_password.txt 
@@ -36,8 +41,6 @@ echo "my_admin_password" > ~/Inception_42/secrets/wp_admin_password.txt
 echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 ```
 
-*Note:* 
-- Never commit .env or the contents of secrets/ to a public repository. Keep them private and properly excluded through .gitignore.
 
 #### Installation and launch : 
 
