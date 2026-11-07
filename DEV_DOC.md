@@ -172,10 +172,12 @@ Type the following for some interesting tests :
 And many more...  
 <br><br>
 
+
+****
 ****
 <br>
 
-## 3 Containers, one finality : Role of the Containers and Inter-Container Interactions
+## Three Containers, one goal : Role of the Containers and Inter-Container Interactions
 
 The project relies on three distinct services, each isolated in its own container and communicating through a private Docker bridge network (`inception_net`).
 
@@ -192,8 +194,6 @@ The project relies on three distinct services, each isolated in its own containe
   - **Role:** Stores all persistent application data, including user accounts, posts, comments, and settings in a relational SQL database.
   - **Process (PID 1):** Runs directly as the main database daemon (`mysqld`)[cite: 13].
 
----
-
 ### 2. How They Interact
 The containers interact through specific protocols over the private internal network:
 1. **Client to NGINX:** The user sends an HTTPS request to the domain on port 443[cite: 8].
@@ -202,7 +202,7 @@ The containers interact through specific protocols over the private internal net
 4. **Shared Volumes:** Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly[cite: 14].
 
 <br><br>
-
+****
 ****
 <br>
 ## About your data, and Volumes :
@@ -245,6 +245,7 @@ Containers do not share a global security context. Secrets are explicitly distri
 
 Because Docker mounts secrets using an in-memory tmpfs filesystem (/run/secrets/), no sensitive passwords are ever written to the container's writable storage layer. Once a container stops, all secret data instantly vanishes from memory without leaving forensic traces on the disk.
 <br><br><br>
+****
 ****
 <br>
 
