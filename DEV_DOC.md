@@ -1,4 +1,4 @@
-## Inception : Before the introduction, here's the map of the project.
+## Inception : A map of the project.
 
 
 ```text
