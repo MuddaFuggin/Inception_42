@@ -78,6 +78,7 @@ If your Debian VM already has a graphical environment and a web browser installe
 
 *Note:* This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
 
+**You can now access and populate your website. All your data will be saved from a session to another, as long as you don't submit the `make fclean` command in the environnement's shell.**
 ****
 
 ### Various available tests
