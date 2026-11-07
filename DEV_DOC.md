@@ -103,7 +103,7 @@ In the following, you might find entries like ${DATA_PATH} or ${your_domain_name
 
 #### Starting, stopping :
 
-*All of those commands has to be launched from the folder containing the _Makefile_ file.*
+*All of those commands have to be launched from the folder containing the _Makefile_ file.*
 *They are actual aliases of *Docker* and *Dockercompose* embeded commands.*
 
 * Use `make start` to start all the containers at once.
