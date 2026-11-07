@@ -99,11 +99,12 @@ Run `make` at the root of the repository : it will prepare the host directories,
 In the following, you might find entries like ${DATA_PATH} or ${your_domain_name}. Remember to always consider those having to be the actual data you entered in the .env file.
 <br><br>
 
-## User Commands :
+## A few User Commands :
 
 #### Starting, stopping :
 
 *All of those commands has to be launched from the folder containing the _Makefile_ file.*
+*They are actual aliases of *Docker* and *Dockercompose* embeded commands.*
 
 * Use `make start` to start all the containers at once.
 * Use `make stop` to stop all the containers at once.
