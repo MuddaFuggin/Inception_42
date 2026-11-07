@@ -4,6 +4,7 @@ This project consists of setting up a small-scale web infrastructure using Docke
 
 Each service runs in its own dedicated container, built from custom Dockerfiles located in the srcs/requirements directory. The containers communicate through a private Docker network.
 
+<br><br><br>
 
 ## Instructions
 
@@ -146,13 +147,12 @@ Using the host network shares the host machine's network stack directly, which l
 Bind mounts map a physical directory from the host directly into a container, while Docker Volumes are entirely managed by Docker within its internal storage. To satisfy the project's requirement of storing data physically in /home/csimonne/data, this infrastructure uses Named Volumes with a local driver pointing explicitly to the host's bind path, ensuring persistent data even if containers are destroyed.
 
 
-****
-
+<br><br><br>
 
 
 ## Going deeper :
 
-### 1. About the Network, PORTS and connections.
+### 1. About Network, PORTS and connections.
 
 #### a. Simple Network scheme :
 
