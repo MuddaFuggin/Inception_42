@@ -131,7 +131,7 @@ And many more...
 
 
 
-
+### Useful informations about the infrastructure :
 
 
 
@@ -150,18 +150,44 @@ And many more...
 
 
 
-# A propos des ports de connection 
+# About the Network, PORTS and connections.
+
+
+[ Browser / Client ]																				[ mapping in *docker-compose.yaml* ]		
+       │
+       │  Port 443 (HTTPS / TLS v1.2-1.3) — The ONLY external entry point  --------------------------->  ports: - "443:443"
+       ▼
+┌────────────────────────────────────────────────────────┐
+│                      [ NGINX ]                         │  Reverse Proxy & TLS Security
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           │  Port 9000 (FastCGI Protocol) — Internal Docker Network ----------------->  expose: 9000
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│               [ WordPress / PHP-FPM ]                  │  CMS Engine & Interpreter
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           │  Port 3306 (SQL Protocol) — Internal Docker Network --------------------->  expose: 3306
+                           ▼
+┌────────────────────────────────________________────────┐
+│                      [ MariaDB ]                       │  Relational Database
+└────────────────────────────────────────────────────────┘
+
+
+
+*HTTP utilise généralement le port 80.*
+*HTTPS utilise généralement le port 443.*
+*SSH utilise généralement le port 22.*
+*MariaDB listens on the port 3306 (TCP) which is the standard port attributed to MySQL communications.*
+*PHP-FPM (engine for Wordpress) listens on the port 9000, which is the standard port attributed to FastCGI communications.*
+
 
 ## la convention Internet Assigned Numbers Authority :
 
 Respecter les conventions facilite :
-
     La configuration réseau.
-
     Le dépannage.
-
     La communication entre machines.
-
     La maintenance des infrastructures.
 
 #### Quelques conventions d'assignation pour les 'Services reseau fondamentaux'
@@ -189,20 +215,16 @@ Services réseau fondamentaux
 
 #### Quelques commandes utiles :
 
-* Tous les ports TCP en écoute
-ss -tln
+- Tous les ports TCP en écoute
+`ss -tln`
+- Tous les ports UDP en écoute
+`ss -uln`
+- Toutes les connexions TCP
+`ss -tn`
+- Tous les sockets (TCP et UDP)
+`ss -tuln`
 
-* Tous les ports UDP en écoute
-ss -uln
-
-* Toutes les connexions TCP
-ss -tn
-
-* Tous les sockets (TCP et UDP)
-ss -tuln
-
-
-* Et pour connaître les services associés aux numéros de ports :
+Et pour connaître les services associés aux numéros de ports :
 cat /etc/services
 
 
@@ -384,3 +406,9 @@ Gestion des utilisateurs : Deux utilisateurs sont obligatoirement créés via WP
 Un compte administrateur dont le nom d'utilisateur ne contient pas le mot "admin" ou "administrator" (ex: csimonne).
 
 Un second utilisateur régulier avec un rôle restreint (ex: visitor en tant qu'auteur).
+
+
+## Pedagogical notes
+
+* You don't need to add the [:443] port number to test your connections and ports. The [https://] prefix already forces the browser to use the *443* port by default. If you type [http://], the browser will use the port *80*.
+* 
