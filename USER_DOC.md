@@ -35,8 +35,8 @@ echo "my_user_password" > ~/Inception_42/secrets/wp_password.txt
 
 * Use `make start` to start all the containers at once.
 * Use `make stop` to stop all the containers at once.
-* Command `make restart` is an alias for `make stop` + `make start`.
-Tips :The commands above can be used for maintenance purposes and to test data persistence.
+* Command `make restart` is an alias for `make stop` + `make start`.  
+The commands above can be used for maintenance purposes and to test data persistence.
 
 #### Different levels of stopping + cleaning (use with care !) :
 
