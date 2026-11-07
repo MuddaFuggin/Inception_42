@@ -213,7 +213,7 @@ The containers interact through specific protocols over the private internal net
 `${DATA_PATH}`/wordpress (pour les fichiers du site WordPress)
 Nginx doesn't hold a Volume.
 
-*About Volumes :*  
+*Of Volumes :*  
 By default, Docker stores all and any data inside the Container. However, this doesn't allow to hold data efficiently overtime as any reboot of the containers would loose new data (the data you add to your website, for instance).
 Fortunately, Docker permits configuration of 'Named Volumes' for data persistence in a default directory, and even *Local Named Volumes* for which we can choose a convenient dedicated path.
 To do so, in the `docker-compose.yml` file, we use the local driver with bind mount options (type: none, o: bind) to make it point directly to a directory on the host machine ($(DATA_PATH)).
