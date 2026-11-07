@@ -154,13 +154,13 @@ And many more...
 
 ### global routing scheme :
 
- ARCHITECTURE / COMMUNICATIONS                 			docker-compose.yml
-───────────────────────────────────────────────────────────────────────────
+ ARCHITECTURE / COMMUNICATIONS
+───────────────────────────────
 
        [ Browser / Client ]
                 |
-                |  Port 443 (HTTPS / TLS v1.2-1.3)
-                |  ONLY external entry point
+                |  Port 443 (HTTPS / TLS v1.2-1.3)			mappings in docker-compose.yml			
+                |  ONLY external entry point				
                 |                                            ports: - "443:443"-
                 |                                            
                 v
@@ -186,11 +186,11 @@ And many more...
 
 ### A few conventions put to use in this project :
 
-*HTTP usually uses port 80.*
-*HTTPS usually uses port 443.*
-*SSH usually uses port  22.*
-*MariaDB listens on the port 3306 (TCP) which is the standard port attributed to MySQL communications.*
-*PHP-FPM (engine for Wordpress) listens on the port 9000, which is the standard port attributed to FastCGI communications.*
+*HTTP usually uses port 80.*  
+*HTTPS usually uses port 443.*  
+*SSH usually uses port  22.*  
+*MariaDB listens on the port 3306 (TCP) which is the standard port attributed to MySQL communications.*  
+*PHP-FPM (engine for Wordpress) listens on the port 9000, which is the standard port attributed to FastCGI communications.*  
 
 
 ## la convention Internet Assigned Numbers Authority :
