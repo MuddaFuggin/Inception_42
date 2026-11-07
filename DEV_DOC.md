@@ -131,35 +131,15 @@ And many more...
 
 
 
-### Useful informations about the infrastructure :
+## Useful informations about the infrastructure :
 
+### About the Network, PORTS and connections.
 
-
-
-
-
-
-
-
-
-
-# NOTES :
-
-
-* Non, vous n'avez pas besoin d'écrire :443. Le préfixe https:// indique déjà automatiquement à n'importe quel navigateur d'utiliser le port 443 par défaut. Écrire [https://csimonne.42.fr/wp-admin/](https://csimonne.42.fr/wp-admin/) suffit donc amplement et correspond à l'URL standard exacte attendue.
-
-
-
-# About the Network, PORTS and connections.
-
-### global routing scheme :
-
- ARCHITECTURE / COMMUNICATIONS
-───────────────────────────────
+#### Simple Network scheme :
 
        [ Browser / Client ]
                 |
-                |  Port 443 (HTTPS / TLS v1.2-1.3)	mappings in docker-compose.yml			
+                |  Port 443 (HTTPS / TLS v1.2-1.3)	  mappings in docker-compose.yml			
                 |  ONLY external entry point				
                 |                                            ports: - "443:443"-
                 |                                            
@@ -184,153 +164,111 @@ And many more...
        |        MariaDB         |  Relational Database
        +------------------------+
 
-### A few conventions put to use in this project :
+#### A few conventions put to use in this project :
 
 **HTTP** conventionally uses port **80**.  
 **HTTPS** conventionally uses port **443**.  
-**SSH** conventionally uses port **22**.
-**MariaDB** listens on the port **3306** (TCP) which is the standard port attributed to MySQL communications. 
+**SSH** conventionally uses port **22**.  
+**MariaDB** listens on the port **3306** (TCP) which is the standard port attributed to MySQL communications.   
 **PHP-FPM** (engine for Wordpress) listens on the port **9000**, which is the standard port attributed to FastCGI communications.  
 
 
-## la convention Internet Assigned Numbers Authority :
+#### The "Internet Assigned Numbers Authority" convention :
 
-Respecter les conventions facilite :
-    La configuration réseau.
-    Le dépannage.
-    La communication entre machines.
-    La maintenance des infrastructures.
+Respecting conventions makes the following tasks easier:
+- Network configuration.
+- Troubleshooting.
+- Communication between machines.
+- Infrastructure maintenance.
 
-#### Quelques conventions d'assignation pour les 'Services reseau fondamentaux'
+##### Common Port Assignments for Fundamental Network Services
 
-Services réseau fondamentaux
+**Fundamental Network Services**
 
-| Port 	| Protocole | Service 
-| ---  	| --- 		| --- 
-| 20 	| TCP 		| FTP Data 
-| 21 	| TCP 		| FTP Control 
-| 22 	| TCP 		| SSH 
-| 23 	| TCP 		| Telnet 
-| 25 	| TCP 		| SMTP (envoi d'emails)
-| 53 	| TCP/UDP	| DNS 
-| 67 	| 68  		| UDP | DHCP 
-| 80 	| TCP  		| HTTP 
-| 110 	| TCP  		| POP3 
-| 123 	| UDP  		| NTP (synchronisation horaire) 
-| 143 	| TCP  		| IMAP 
-| 443 	| TCP  		| HTTPS 
-| 465 	| TCP  		| SMTP sécurisé 
-| 587 	| TCP  		| SMTP Submission 
-| 993 	| TCP  		| IMAPS 
-| 995 	| TCP  		| POP3S
+| Port | Protocol | Service |
+|---:|---|---|
+| 20 | TCP | FTP Data |
+| 21 | TCP | FTP Control |
+| 22 | TCP | SSH |
+| 23 | TCP | Telnet |
+| 25 | TCP | SMTP (email sending) |
+| 53 | TCP/UDP | DNS |
+| 67 / 68 | UDP | DHCP |
+| 80 | TCP | HTTP |
+| 110 | TCP | POP3 |
+| 123 | UDP | NTP (time synchronization) |
+| 143 | TCP | IMAP |
+| 443 | TCP | HTTPS |
+| 465 | TCP | Secure SMTP |
+| 587 | TCP | SMTP Submission |
+| 993 | TCP | IMAPS |
+| 995 | TCP | POP3S |
 
-#### Quelques commandes utiles :
+#### Some Useful Commands
 
-- Tous les ports TCP en écoute
-`ss -tln`
-- Tous les ports UDP en écoute
-`ss -uln`
-- Toutes les connexions TCP
-`ss -tn`
-- Tous les sockets (TCP et UDP)
-`ss -tuln`
+````
+1. **IP address:** identifies a network interface on a machine.
+2. **Port:** identifies a communication endpoint on that machine.
+3. **Socket:** represents one endpoint of a communication channel, generally associated with an IP address, a port, and a protocol.
+````
 
-Et pour connaître les services associés aux numéros de ports :
+- All listening TCP ports:
+  ```bash
+  ss -tln
+  ```
+- All listening UDP ports:
+  ```bash
+  ss -uln
+  ```
+- All TCP connections:
+  ```bash
+  ss -tn
+  ```
+- All listening TCP and UDP sockets:
+  ```bash
+  ss -tuln
+  ```
+
+To find out which services are associated with port numbers:
+
+```bash
 cat /etc/services
+```
 
+#### An Important Concept: Port ≠ Protocol
 
-#### Une notion importante : port ≠ protocole
+A port is simply a number used to identify a communication endpoint on a machine.
 
-C'est probablement le point le plus intéressant à retenir.
+For example:
 
-Un port est simplement un numéro permettant d'identifier un point de communication sur une machine.
+```text
+IP:       192.168.1.10
+Port:     22
+Protocol: TCP
+Service:  SSH
+```
 
-Par exemple :
+A single machine can host several services simultaneously:
 
-IP : 192.168.1.10
-Port : 22
-Protocole : TCP
-Service : SSH
-
-Et une même machine peut héberger simultanément :
-
-
+```text
 192.168.1.10:22    → SSH
 192.168.1.10:80    → HTTP
 192.168.1.10:443   → HTTPS
 192.168.1.10:3306  → MySQL
+```
 
-Tous ces services peuvent fonctionner simultanément.
+All these services can run simultaneously.
 
-#### Pour aller plus loin
+#### Further Reading
 
-Je te conseille de retenir particulièrement ces trois notions :
-
-1. IP : identifie une interface réseau sur une machine.
-2. Port : identifie un point de communication sur cette machine.
-3. Socket : représente une extrémité de communication, généralement associée à une IP, un port et un protocole.
+I particularly recommend remembering these three concepts:
 
 
+#### Displaying and Understanding Docker Port Status
 
+🔍 **Understanding NGINX Port Mapping**
 
-#### Afficher et dechiffrer le statut des ports docker.
-
-🔍 Interprétation du mapping de ports NGINX
-
-La ligne 0.0.0.0:443->443/tcp, [::]:443->443/tcp affichée lors d'un docker ps ou status est la preuve visuelle que votre pare-feu et votre point d'entrée sont correctement configurés pour le projet Inception.
-
-Voici comment la lire de gauche à droite :
-
-1. La partie IPv4 : 0.0.0.0:443->443/tcp
-
-0.0.0.0 : Cela représente toutes les adresses IPv4 de votre machine hôte (la VM). Cela signifie que le serveur écoute sur toutes ses interfaces réseau, prêt à recevoir des requêtes de l'extérieur.
-
-:443 (le premier) : C'est le port de la machine hôte (la VM) qui est ouvert au public.
-
-->443/tcp : C'est la redirection vers le conteneur. Tout le trafic TCP qui arrive sur le port 443 de la machine hôte est envoyé vers le port 443 interne de votre conteneur NGINX.
-
-2. La partie IPv6 : [::]:443->443/tcp
-
-[::] : C'est l'équivalent exact de 0.0.0.0, mais pour le protocole IPv6. NGINX est donc capable de recevoir du trafic moderne en IPv6.
-
-La redirection (->443/tcp) fonctionne de la même manière, envoyant le trafic vers le port 443 du conteneur.
-
-🎯 Que dire à l'évaluateur ?
-
-Si l'évaluateur vous demande de prouver que votre infrastructure respecte le sujet, montrez-lui cette ligne et expliquez :
-"Cette ligne prouve que NGINX écoute sur le port public 443 (en IPv4 et IPv6) et transfère ce trafic de manière isolée à l'intérieur de son conteneur. Comme WordPress et MariaDB n'ont pas cette ligne, ils sont totalement invisibles depuis l'extérieur, ce qui valide la règle du point d'entrée unique."
-
-
-#### Alpine vs Debian
-
-* Alpine Linux
-Léger
-Environ 5 à 10 Mo pour l'image de base (selon la version).
-
-* Debian
-Polyvalent
-Image de base généralement autour de quelques dizaines de Mo.
-
-
-Caractéristique	                    Alpine	                Debian
-
-Taille    	                        Très petite	Plus         importante
-Gestionnaire de paquets	            apk	                     apt
-Base système                        musl libc	             glibc
-Shell par défaut	                /bin/sh (BusyBox)        /bin/sh (dash)
-Outils préinstallés	                Peu nombreux	         Plus nombreux
-Philosophie	                        Minimalisme	             Polyvalence
-
-Pourquoi utiliser Alpine ?
-
-L'idée est simple : un conteneur Docker n'a pas besoin d'être un système d'exploitation complet.
-Si ton conteneur sert uniquement à faire tourner Nginx, tu n'as pas forcément besoin de tous les outils et composants fournis par Debian.
-
-* Conclusion :
-  
-Alpine : intéressant pour comprendre le minimalisme des conteneurs et construire des images légères.
-
-Debian : intéressant pour travailler dans un environnement plus familier, avec davantage d'outils et une compatibilité logicielle généralement plus large.
+The line `0.0.0.0:443
 
 
 
