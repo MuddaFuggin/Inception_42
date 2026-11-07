@@ -1,3 +1,50 @@
+## Inception : A map of the project.
+
+
+```text
+.
+├── Makefile                     # Entry point for managing the infrastructure (Make)
+├── README.md                    # General project overview (in English, with required login information)
+├── USER_DOC.md                  # User and administrator documentation
+├── DEV_DOC.md                   # Developer documentation (setup, persistence, commands)
+├── .gitignore                   # Files and directories excluded from Git tracking (srcs/.env, secrets/)
+│
+├── secrets/                     # Local secured directory containing passwords (not tracked by Git)
+│   ├── db_password.txt          # MariaDB user password
+│   ├── db_root_password.txt     # MariaDB root password
+│   ├── wp_admin_password.txt    # WordPress administrator password
+│   └── wp_password.txt          # Standard WordPress user password
+│
+└── srcs/                        # Directory containing all Docker configuration files
+    ├── .env                     # Local environment variables (non-sensitive, not tracked by Git)
+    ├── .env.example             # Configuration template (tracked by Git)
+    ├── docker-compose.yml       # Orchestration file (services, bridge networks, bind-mounted volumes)
+    │
+    └── requirements/            # Isolated build instructions and configuration for each service
+        ├── mariadb/
+        │   ├── Dockerfile       # Debian-based image for the database server
+        │   ├── conf/
+        │   │   └── 50-server.cnf # MySQL/MariaDB server configuration
+        │   └── tools/
+        │       └── entrypoint.sh # Initialization script (database creation and privilege configuration)
+        │
+        ├── wordpress/
+        │   ├── Dockerfile       # Debian-based image with PHP-FPM and WP-CLI
+        │   ├── conf/
+        │   │   └── www.conf     # PHP-FPM pool configuration (listening on port 9000)
+        │   └── tools/
+        │       └── wordpress_entrypoint.sh # Waits for MariaDB and handles WordPress installation via WP-CLI
+        │
+        └── nginx/
+            ├── Dockerfile       # Alpine/Debian-based image for the reverse proxy
+            ├── conf/
+            │   └── nginx.conf   # Server configuration (TLS 1.2/1.3, port 443, FastCGI)
+            └── tools/
+                └── nginx_entrypoint.sh # SSL certificate generation and NGINX startup
+```
+
+<br><br>
+
 ## Introduction
 
 This project consists of setting up a small-scale web infrastructure using Docker and Docker Compose. The goal is to deploy a secure and isolated stack consisting of NGINX, WordPress, and MariaDB inside a Debian virtual machine.
