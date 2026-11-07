@@ -121,22 +121,28 @@ And many more...
 
 ## A few words about the infrastructure used, and the advantages of using Docker containers.
 
-* Docker Secrets & Security Compliance:  
+* Docker Secrets & Security Compliance:
+* 
 To comply with the strict security requirements of the 42 Inception project, no passwords or sensitive data are stored in plain text within the .env file or configuration scripts. Instead, all database and administrator credentials are securely managed using Docker Secrets. These secrets are stored locally on the host, protected with restricted permissions, and injected directly into the containers' memory (/run/secrets/) at runtime—ensuring they remain completely isolated, hidden, and never exposed in the repository.
 
-* Docker Usage & Design Choices:    
+* Docker Usage & Design Choices:
+* 
 Docker is utilized to containerize applications at the OS level, sharing the host's kernel instead of virtualizing hardware. This project employs a modular design where each service relies on custom initialization scripts (entrypoint.sh) to prepare the environment and ensure the main process remains in the foreground as PID 1.
 
-  * Virtual Machines vs Docker:  
-  Virtual Machines run a full guest operating system on top of virtualized hardware, making them heavy and resource-intensive. Docker containerizes applications at the OS level, sharing the host's kernel, which makes it significantly faster and more lightweight.
+* Virtual Machines vs Docker:
+* 
+Virtual Machines run a full guest operating system on top of virtualized hardware, making them heavy and resource-intensive. Docker containerizes applications at the OS level, sharing the host's kernel, which makes it significantly faster and more lightweight.
 
-* Secrets vs Environment Variables:  
+* Secrets vs Environment Variables:
+* 
 Environment variables are useful for general configuration (like domain names) but can be exposed if the container environment is inspected. Docker Secrets are used for sensitive data (like database passwords) because they are securely mounted directly into temporary files, keeping them hidden from the standard environment.
 
-* Docker Network vs Host Network:  
+* Docker Network vs Host Network:
+* 
 Using the host network shares the host machine's network stack directly, which lacks isolation. This project uses a custom Docker Network to create an isolated internal bridge where containers communicate securely using internal DNS, exposing only port 443 to the outside world.
 
-* Docker Volumes vs Bind Mounts:  
+* Docker Volumes vs Bind Mounts:
+* 
 Bind mounts map a physical directory from the host directly into a container, while Docker Volumes are entirely managed by Docker within its internal storage. To satisfy the project's requirement of storing data physically in /home/csimonne/data, this infrastructure uses Named Volumes with a local driver pointing explicitly to the host's bind path, ensuring persistent data even if containers are destroyed.
 
 
