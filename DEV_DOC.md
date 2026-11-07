@@ -121,9 +121,9 @@ And many more...
 ## About your data :
 
 * As this configuration uses mounted Named Volumes, everything you add or remove from your website will persist overtime. **Unless you go 'make fclean' !**.
-* Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=   ` in the `.env` file.
-${DATA_PATH}/mariadb (pour la base de données)
-${DATA_PATH}/wordpress (pour les fichiers du site WordPress)
+* Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=  ` in the `.env` file.
+`${DATA_PATH}`/mariadb (pour la base de données)
+`${DATA_PATH}`/wordpress (pour les fichiers du site WordPress)
 Nginx doesn't hold a Volume.
 
 <br><br><br>
