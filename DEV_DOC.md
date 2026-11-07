@@ -152,6 +152,39 @@ And many more...
 
 # About the Network, PORTS and connections.
 
+ ARCHITECTURE / COMMUNICATIONS                 docker-compose.yml
+─────────────────────────────────────         ─────────────────────────
+
+       [ Browser / Client ]
+                |
+                |  Port 443 (HTTPS / TLS v1.2-1.3)
+                |  ONLY external entry point
+                |                                            ports:
+                |                                            - "443:443"
+                v
+       +------------------------+
+       |         NGINX          |  Reverse Proxy & TLS Security
+       +------------------------+
+                |
+                |  Port 9000 (FastCGI Protocol)
+                |  Internal Docker Network
+                |                                            expose: 9000
+                v
+       +------------------------+
+       |   WordPress / PHP-FPM  |  CMS Engine & Interpreter
+       +------------------------+
+                |
+                |  Port 3306 (SQL Protocol)
+                |  Internal Docker Network
+                |                                            expose: 3306
+                v
+       +------------------------+
+       |        MariaDB         |  Relational Database
+       +------------------------+
+
+
+
+
 
 [ Browser / Client ]																				[ mapping in *docker-compose.yaml* ]		
        │
@@ -173,39 +206,7 @@ And many more...
 │                      [ MariaDB ]                       │  Relational Database
 └────────────────────────────────────────────────────────┘
 
-				[ Browser / Client ]                                   [mapping in *docker-compose.yaml*]
-   			 		    |
-   			 		    |  Port 443 (HTTPS / TLS v1.2-1.3)
-   			 		    |  ONLY external entry point
-   			 		    |                                      					ports: 443:443
-   					    |                                       
-   					    v
-+------------------------------------------------------+
-|                       NGINX                          |
-|              Reverse Proxy & TLS Security            |
-+--------------------------+---------------------------+
-                           |
-                           |  Port 9000 
-						   | (FastCGI Protocol) Internal Docker Network
-                           |  													expose: 9000
-                           |
-                           v
-+------------------------------------------------------+
-|                 WordPress / PHP-FPM                  |
-|                  CMS Engine & Interpreter            |
-+--------------------------+---------------------------+
-                           |
-                           |  Port 3306 (SQL Protocol) Internal Docker Network
-                           |  
-                           +--------------------------> 						expose: 3306
-                           |
-                           v
-+------------------------------------------------------+
-|                       MariaDB                        |
-|                  Relational Database                 |
-+------------------------------------------------------+
-
-
+		
 *HTTP utilise généralement le port 80.*
 *HTTPS utilise généralement le port 443.*
 *SSH utilise généralement le port 22.*
