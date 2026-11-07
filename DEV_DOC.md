@@ -199,7 +199,7 @@ Respecting conventions makes the following tasks easier:
 - Communication between machines.
 - Infrastructure maintenance.
 
-##### d. Common Port Assignments for Fundamental Network Services
+Common Port Assignments for Fundamental Network Services :
 
 | Port | Protocol | Service |
 |---:|---|---|
@@ -220,7 +220,7 @@ Respecting conventions makes the following tasks easier:
 | 993 | TCP | IMAPS |
 | 995 | TCP | POP3S |
 
-#### e. Some Useful Bash Commands regarding Networks in this project
+#### d. Some Useful Bash Commands regarding Networks in this project
 
 ````
 1. **IP address:** identifies a network interface on a machine.
@@ -251,7 +251,7 @@ To find out which services are associated with port numbers:
 cat /etc/services
 ```
 
-#### f. An Important Concept: Port ≠ Protocol
+#### e. An Important Concept: Port ≠ Protocol
 
 A port is simply a number used to identify a communication endpoint on a machine.
 
