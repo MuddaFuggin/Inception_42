@@ -97,7 +97,7 @@ _Note : Please replace all '{your_domain_name}' entries by the domain name you i
 If your Debian VM already has a graphical environment and a web browser installed, only a few steps are required:
 
 1. Find your VM's IP address: `ip addr`.
-2. Add your domain name to `/etc/hosts`, typing `sudo vim /etc/hosts`, and adding this line :  
+2. Add your domain name to `/etc/hosts` : type `sudo vim /etc/hosts`, and add this line to the document ->  
    `[YOUR_IP] {your_domain_name}`
 3. Open your browser inside the VM and visit:
    - `https://{your_domain_name}/`
