@@ -108,8 +108,9 @@ In the following, you might find entries like ${DATA_PATH} or ${your_domain_name
 
 * Use `make start` to start all the containers at once.
 * Use `make stop` to stop all the containers at once.
-* Command `make restart` = `make stop` + `make start`.  
-Tips :The commands above can be used for maintenance purposes and to test data persistence.
+* Command `make restart` = `make stop` + `make start`.
+  
+*Tips :The commands above can be used for maintenance purposes and to test data persistence.*
 
 #### Different levels of stopping + cleaning (use with care !) :
 
