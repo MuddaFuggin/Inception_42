@@ -55,7 +55,7 @@ _disclaimer : A security warning will appear due to the self-signed SSL/TLS cert
 
 #### With this particular 'headless' Linux Debian setup :
 
-Due to the limitations of this development environment (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
+If you are using the same Linux-Debian environment configuration as the developper (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
 
 * For the website :
 `google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/"`   
