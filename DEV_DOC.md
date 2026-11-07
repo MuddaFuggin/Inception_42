@@ -152,15 +152,17 @@ And many more...
 
 # About the Network, PORTS and connections.
 
+### global routing scheme :
+
  ARCHITECTURE / COMMUNICATIONS                 			docker-compose.yml
-─────────────────────────────────────        			 ─────────────────────────
+───────────────────────────────────────────────────────────────────────────
 
        [ Browser / Client ]
                 |
                 |  Port 443 (HTTPS / TLS v1.2-1.3)
                 |  ONLY external entry point
-                |                                            ports:
-                |                                            - "443:443"
+                |                                            ports: - "443:443"-
+                |                                            
                 v
        +------------------------+
        |         NGINX          |  Reverse Proxy & TLS Security
@@ -182,11 +184,11 @@ And many more...
        |        MariaDB         |  Relational Database
        +------------------------+
 
+### A few conventions put to use in this project :
 
-		
-*HTTP utilise généralement le port 80.*
-*HTTPS utilise généralement le port 443.*
-*SSH utilise généralement le port 22.*
+*HTTP usually uses port 80.*
+*HTTPS usually uses port 443.*
+*SSH usually uses port  22.*
 *MariaDB listens on the port 3306 (TCP) which is the standard port attributed to MySQL communications.*
 *PHP-FPM (engine for Wordpress) listens on the port 9000, which is the standard port attributed to FastCGI communications.*
 
