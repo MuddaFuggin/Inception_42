@@ -69,9 +69,8 @@ Tips :The commands above can be used for maintenance purposes and to test data p
 
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
-****
-
-### Access the website : 
+<br><br>
+## Access the website : 
 
 _disclaimer : A security warning will appear due to the self-signed SSL/TLS certificate, which is expected._
 
@@ -100,9 +99,9 @@ If your Debian VM already has a graphical environment and a web browser installe
 
 *Note:* This setup is entirely optional. Inception works perfectly fine with a headless VM and a browser running on the host machine.
 
-****
+<br><br>
 
-### Various available tests
+## Various available tests
 
 _Run `make check` at the root of the repository. It gives you access to a menu, possibly sub-menus, providing various options. Type `clear` to clear your entries or `exit` to go back to bash._
 
