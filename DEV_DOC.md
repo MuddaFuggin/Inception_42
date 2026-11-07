@@ -4,7 +4,6 @@ This project consists of setting up a small-scale web infrastructure using Docke
 
 Each service runs in its own dedicated container, built from custom Dockerfiles located in the srcs/requirements directory. The containers communicate through a private Docker network.
 
-****
 
 ## Instructions
 
