@@ -118,7 +118,7 @@ In the following, you might find entries like ${DATA_PATH} or ${your_domain_name
 * `make clean` : Equivalent to make down + removes the Compose-managed named volumes (docker compose down -v). In our configuration, the Docker volume is removed, but the underlying host directory (${DATA_PATH}/mariadb) and its data are preserved.
 * `make fclean` : Equivalent to make clean + all eligible unused resources (images, unused misc containers, unused networks, build cache) + deletes the contents of the host data directory using rm -rf $(DATA_PATH)*.
 
-Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
+**Warning :** *This last command permanently deletes the persistent database and WordPress data stored in the host directories.*
 
 <br><br>
 ## Access the website : 
