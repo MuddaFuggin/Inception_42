@@ -117,8 +117,8 @@ Type the following for some interesting tests :
 - `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
 
 And many more...  
-
-## About your data.
+<br><br>
+## About your data :
 
 * As this configuration uses mounted Named Volumes, everything you add or remove from your website will persist overtime. **Unless you go 'make fclean' !**.
 * Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=   ` in the `.env` file.
