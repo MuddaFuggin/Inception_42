@@ -75,7 +75,7 @@ volumes:
     driver_opts:
       type: none                             
       o: bind                                # <-- mounting of "bind" type.
-      device: /home/csimonne/data/mariadb    # <-- target path on host.
+      device: ${DATA_PATH}/mariadb    # <-- target path on host.
 
   wordpress_data:
     name: wordpress_data
@@ -83,7 +83,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/csimonne/data/wordpress
+      device: ${DATA_PATH}/wordpress
 
 
 # declaration and configuration of networks.
