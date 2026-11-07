@@ -194,7 +194,7 @@ All external web traffic is secured using TLS encryption. Nginx is configured to
 
 #### Host-Level File Permissions & Ownership:
 
-The raw credential files stored in the host's secrets/ directory are strictly protected using restricted permissions (such as chmod 600), ensuring that only the authorized owner (and root) on the host machine can read them.
+The raw credential files stored in the host's secrets/ directory are strictly protected using restricted permissions (chmod 600), ensuring that only the authorized owner (and root) on the host machine can read them.
 
 #### Container Isolation & Least Privilege Principle:
 
