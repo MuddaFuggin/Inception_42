@@ -43,7 +43,7 @@ The commands above can be used for maintenance purposes and to test data persist
 
 * `make down` : Stops and removes all project containers and the associated Docker network. Docker destroys the virtual network interfaces and bridge associated with that network. Named volumes and bind-mounted host data are preserved.
 * `make clean` : Equivalent to make down + removes the Compose-managed named volumes (docker compose down -v). In our configuration, the Docker volume is removed, but the underlying host directory (/home/csimonne/data/mariadb) and its data are preserved.
-* `make fclean` : Equivalent to make clean + all eligible unused resources (images, unused misc containers, unused networks, build cache) + deletes the contents of the host data directory using rm -rf $(DATA_PATH)*.
+* `make fclean` : Equivalent to make clean + deletes all eligible unused resources (images, unused misc containers, unused networks, build cache) + **deletes the contents of the host data directory using rm -rf $(DATA_PATH)**.
 
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
