@@ -40,7 +40,7 @@
             ├── conf/
             │   └── nginx.conf   # Server configuration (TLS 1.2/1.3, port 443, FastCGI)
             └── tools/
-                └── nginx_entrypoint.sh # SSL certificate generation and NGINX startup
+                └── nginx_entrypoint.sh # TLS/SSL certificate generation and NGINX startup
 ```
 
 <br><br>
@@ -171,13 +171,22 @@ Type the following for some interesting tests :
 
 And many more...  
 <br><br>
-## About your data :
 
-* As this configuration uses mounted Named Volumes, everything you add or remove from your website will persist overtime. **Unless you go** `make fclean` **!**
+****
+<br>
+
+## About your data, and Volumes :
+
+* As this configuration uses mounted *Named Volumes with local bind mount*, everything you add or remove from your website will persist overtime. **Unless you go** `make fclean` **!**
 * Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=  ` in the `.env` file.
 `${DATA_PATH}`/mariadb (pour la base de données)
 `${DATA_PATH}`/wordpress (pour les fichiers du site WordPress)
 Nginx doesn't hold a Volume.
+
+*About Volumes :*  
+By default, Docker stores all and any data inside the Container. However, this doesn't allow to hold data efficiently overtime as any reboot of the containers would loose new data (the data you add to your website, for instance).
+Fortunately, Docker permits configuration of 'Named Volumes' for data persistence in a default directory, and even *Local Named Volumes* for which we can choose a convenient dedicated path.
+To do so, in the `docker-compose.yml` file, we use the local driver with bind mount options (type: none, o: bind) to make it point directly to a directory on the host machine ($(DATA_PATH)).
 
 <br><br>
 
@@ -205,8 +214,10 @@ Containers do not share a global security context. Secrets are explicitly distri
 #### No Persistent Disk Footprint Inside Containers:
 
 Because Docker mounts secrets using an in-memory tmpfs filesystem (/run/secrets/), no sensitive passwords are ever written to the container's writable storage layer. Once a container stops, all secret data instantly vanishes from memory without leaving forensic traces on the disk.
-
 <br><br><br>
+****
+<br>
+
 ## A few words about the infrastructure used, and the advantages of using Docker containers.
 
 * Docker Secrets & Security Compliance:
