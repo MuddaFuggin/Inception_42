@@ -107,9 +107,9 @@ Type the following for some interesting tests :
 - `wp` > `security` : displays TLS status.
 - `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
 
-And many more...
+And many more...  
 
-
+****  
 
 
 
@@ -133,9 +133,9 @@ And many more...
 
 ## Useful informations about the infrastructure :
 
-### About the Network, PORTS and connections.
+### 1. About the Network, PORTS and connections.
 
-#### Simple Network scheme :
+#### a. Simple Network scheme :
 
        [ Browser / Client ]
                 |
@@ -164,7 +164,7 @@ And many more...
        |        MariaDB         |  Relational Database
        +------------------------+
 
-#### A few conventions put to use in this project :
+#### b. A few conventions put to use in this project :
 
 **HTTP** conventionally uses port **80**.  
 **HTTPS** conventionally uses port **443**.  
@@ -173,7 +173,7 @@ And many more...
 **PHP-FPM** (engine for Wordpress) listens on the port **9000**, which is the standard port attributed to FastCGI communications.  
 
 
-#### The "Internet Assigned Numbers Authority" convention :
+#### c. The "Internet Assigned Numbers Authority" convention :
 
 Respecting conventions makes the following tasks easier:
 - Network configuration.
@@ -181,9 +181,7 @@ Respecting conventions makes the following tasks easier:
 - Communication between machines.
 - Infrastructure maintenance.
 
-##### Common Port Assignments for Fundamental Network Services
-
-**Fundamental Network Services**
+##### d. Common Port Assignments for Fundamental Network Services
 
 | Port | Protocol | Service |
 |---:|---|---|
@@ -204,7 +202,7 @@ Respecting conventions makes the following tasks easier:
 | 993 | TCP | IMAPS |
 | 995 | TCP | POP3S |
 
-#### Some Useful Commands
+#### e. Some Useful Bash Commands regarding Networks in this project
 
 ````
 1. **IP address:** identifies a network interface on a machine.
@@ -235,7 +233,7 @@ To find out which services are associated with port numbers:
 cat /etc/services
 ```
 
-#### An Important Concept: Port ≠ Protocol
+#### f. An Important Concept: Port ≠ Protocol
 
 A port is simply a number used to identify a communication endpoint on a machine.
 
@@ -259,16 +257,6 @@ A single machine can host several services simultaneously:
 
 All these services can run simultaneously.
 
-#### Further Reading
-
-I particularly recommend remembering these three concepts:
-
-
-#### Displaying and Understanding Docker Port Status
-
-🔍 **Understanding NGINX Port Mapping**
-
-The line `0.0.0.0:443
 
 
 
