@@ -209,10 +209,10 @@ The containers interact through specific protocols over the private internal net
 ## About your data, and Volumes :
 
 * As this configuration uses mounted *Named Volumes with local bind mount*, everything you add or remove from your website will persist overtime. **Unless you go** `make fclean` **!**
-* Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=  ` in the `.env` file.
-`${DATA_PATH}`/mariadb (pour la base de données)
-`${DATA_PATH}`/wordpress (pour les fichiers du site WordPress)
-Nginx doesn't hold a Volume.
+* Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=  ` in the `.env` file.  
+`${DATA_PATH}`/mariadb (pour la base de données)  
+`${DATA_PATH}`/wordpress (pour les fichiers du site WordPress)  
+Nginx doesn't hold a Volume.  
 
 *Of Volumes :*  
 By default, Docker stores all and any data inside the Container. However, this doesn't allow to hold data efficiently overtime as any reboot of the containers would loose new data (the data you add to your website, for instance).
