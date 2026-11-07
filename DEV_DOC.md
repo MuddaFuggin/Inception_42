@@ -53,9 +53,7 @@ Each service runs in its own dedicated container, built from custom Dockerfiles 
 
 <br><br>
 
-## Instructions
-
-To compile, install, and execute this project:
+## Instructions To compile, install, and execute the stack :
 
 #### Prerequisites :
 
