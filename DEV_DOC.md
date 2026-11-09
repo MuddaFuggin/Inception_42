@@ -120,6 +120,10 @@ In the following, you might find entries like ${DATA_PATH} or ${your_domain_name
 
 **Warning :** *This last command permanently deletes the persistent database and WordPress data stored in the host directories.*
 
+#### Changing your credentials :
+
+If you wish to change your credentials, you'll have to submit the make fclean command, knowing that it will permanently delete any change you made on your website, and then edit your files in the /secrets/ folder (see #Your First Launch, point 2). Alternatively, you can change only your Wordpress passwords from the website's Dashboard, keeping your data safe. you can also use the command `docker compose -f srcs/docker-compose.yml exec wordpress wp user update {USER_NAME} --user_pass="NouveauMotDePasse" --allow-root --path=/var/www/html`
+
 <br><br>
 ## Access the website : 
 
