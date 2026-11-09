@@ -47,6 +47,11 @@ The commands above can be used for maintenance purposes and to test data persist
 
 Warning: This last command permanently deletes the persistent database and WordPress data stored in the host directories.
 
+#### Changing your credentials :
+
+If you wish to change your credentials, you'll have to submit the `make fclean` command, knowing that it will **permanently delete any change you made on your website**, and then edit your files in the /secrets/ folder (see #Your First Launch, point 2).
+Alternatively, you can change only your *Wordpress* passwords from the website's *Dashboard*, keeping your data safe.
+
 ****
 
 ### Access the website : 
