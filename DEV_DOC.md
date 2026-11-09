@@ -4,10 +4,10 @@
 ```text
 .
 ├── Makefile                     # Entry point for managing the infrastructure (Make)
-├── README.md                    # General project overview (in English, with required login information)
+├── README.md                    # General project overview
 ├── USER_DOC.md                  # User and administrator documentation
-├── DEV_DOC.md                   # Developer documentation (setup, persistence, commands)
-├── .gitignore                   # Files and directories excluded from Git tracking (srcs/.env, secrets/)
+├── DEV_DOC.md                   # Developer documentation
+├── .gitignore                   # Files and directories excluded from Git tracking
 │
 ├── secrets/                     # Local secured directory containing passwords (not tracked by Git)
 │   ├── db_password.txt          # MariaDB user password
@@ -16,7 +16,7 @@
 │   └── wp_password.txt          # Standard WordPress user password
 │
 └── srcs/                        # Directory containing all Docker configuration files
-    ├── .env                     # Local environment variables (non-sensitive, not tracked by Git)
+    ├── (.env)                   # Not tracked by Git, has to be created by admin or user during setup.
     ├── .env.example             # Configuration template (tracked by Git)
     ├── docker-compose.yml       # Orchestration file (services, bridge networks, bind-mounted volumes)
     │
@@ -36,7 +36,7 @@
         │       └── wordpress_entrypoint.sh # Waits for MariaDB and handles WordPress installation via WP-CLI
         │
         └── nginx/
-            ├── Dockerfile       # Alpine/Debian-based image for the reverse proxy
+            ├── Dockerfile       # Alpine-based image for the reverse proxy
             ├── conf/
             │   └── nginx.conf   # Server configuration (TLS 1.2/1.3, port 443, FastCGI)
             └── tools/
