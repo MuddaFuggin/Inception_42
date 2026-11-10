@@ -293,7 +293,7 @@ Bind mounts map a physical directory from the host directly into a container, wh
 
        [ Browser / Client ] https://csimonne.42.fr:4443 --> VirtualBox[4443:443]
                 |             
-================|==========================================================================
+       =========|==========================================================================
                 |  Port 443 (HTTPS / TLS v1.2-1.3)	         mappings in docker-compose.yml			
                 |  ONLY external entry point				
                 |                                            ports: - "443:443"-                    
@@ -301,7 +301,7 @@ Bind mounts map a physical directory from the host directly into a container, wh
        +------------------------+
        |         NGINX          |  Reverse Proxy & TLS Security
        +------------------------+
-================|==========================================================================
+       =========|==========================================================================
                 |  Port 9000 (FastCGI Protocol)
                 |  Internal Docker Network
                 |                                            expose: 9000
@@ -309,7 +309,7 @@ Bind mounts map a physical directory from the host directly into a container, wh
        +------------------------+
        |   WordPress / PHP-FPM  |  CMS Engine & Interpreter
        +------------------------+
-================|==========================================================================
+       =========|==========================================================================
                 |  Port 3306 (SQL Protocol)
                 |  Internal Docker Network
                 |                                            expose: 3306
