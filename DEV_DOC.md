@@ -289,19 +289,19 @@ Bind mounts map a physical directory from the host directly into a container, wh
 
 *Note : 127.0.0.1 always references to the machine (or network) from which a connection is made.*
 
-#### a. Simple Network scheme :
+#### a.1. Simple Network scheme :
 
-       [ Browser / Client ]
-                |
-                |  Port 443 (HTTPS / TLS v1.2-1.3)	  mappings in docker-compose.yml			
+       [ Browser / Client ] https://csimonne.42.fr:4443 --> VirtualBox[4443:443]
+                |             
+================|==========================================================================
+                |  Port 443 (HTTPS / TLS v1.2-1.3)	         mappings in docker-compose.yml			
                 |  ONLY external entry point				
-                |                                            ports: - "443:443"-
-                |                                            
+                |                                            ports: - "443:443"-                    
                 v
        +------------------------+
        |         NGINX          |  Reverse Proxy & TLS Security
        +------------------------+
-                |
+================|==========================================================================
                 |  Port 9000 (FastCGI Protocol)
                 |  Internal Docker Network
                 |                                            expose: 9000
@@ -309,7 +309,7 @@ Bind mounts map a physical directory from the host directly into a container, wh
        +------------------------+
        |   WordPress / PHP-FPM  |  CMS Engine & Interpreter
        +------------------------+
-                |
+================|==========================================================================
                 |  Port 3306 (SQL Protocol)
                 |  Internal Docker Network
                 |                                            expose: 3306
@@ -318,7 +318,30 @@ Bind mounts map a physical directory from the host directly into a container, wh
        |        MariaDB         |  Relational Database
        +------------------------+
 
-#### b. A few conventions put to use in this project :
+#### a.2 Request Path: From Browser to Database
+
+Here is the step-by-step path that connects your web page to your project through the Oracle VirtualBox redirection:
+
+🌍 **1. The Physical Mac Browser (Port 4443)**
+* The request originates from your browser using the target URL `https://csimonne.42.fr:4443`.
+* The on-the-fly DNS rule (`--host-resolver-rules="MAP csimonne.42.fr 127.0.0.1"`) forces this request to the Mac's loopback address (`127.0.0.1`), bypassing the lack of administrator rights needed to modify the school's `/etc/hosts` file.
+
+🛡️ **2. The VirtualBox Hypervisor (NAT Forwarding 4443 ➔ 443)**
+* VirtualBox listens on the local port 4443 of your Mac.
+* Thanks to your Port Forwarding rule, the hypervisor intercepts this incoming traffic and injects it directly into the standard HTTPS port (443) inside the Debian virtual machine.
+
+🚪 **3. The NGINX Security Gateway (Port 443 ➔ Port 9000)**
+* The request arrives on port 443 of the VM, which Docker immediately routes to the NGINX container (mapped via the `ports: "443:443"` directive).
+* NGINX, acting as the only exposed entry point, decrypts the TLS security layer.
+* Since it cannot interpret PHP, it forwards the page-building request to the WordPress container through the private FastCGI protocol on port 9000.
+
+⚙️ **4. The Internal Private Network (Ports 9000 and 3306)**
+* **WordPress (PHP-FPM):** Receives the commands on its port 9000. It executes the PHP scripts and queries the database via the isolated `inception_net` network on port 3306.
+* **MariaDB:** Receives the SQL query on port 3306, retrieves the data from its persistent volume, and sends it back to WordPress.
+* Finally, WordPress assembles the final HTML code and sends it back to NGINX, which re-encrypts it and sends it all the way back up to your browser.
+
+
+#### b. A few conventions at use in this project :
 
 **HTTP** conventionally uses port **80**.  
 **HTTPS** conventionally uses port **443**.  
