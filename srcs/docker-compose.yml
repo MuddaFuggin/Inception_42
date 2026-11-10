@@ -54,7 +54,7 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - "443:443"
+      - "443:443"                          # Only port allowed to exterior
     volumes:
       - wordpress_data:/var/www/html
     environment:
