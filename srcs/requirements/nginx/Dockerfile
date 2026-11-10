@@ -1,9 +1,10 @@
 FROM alpine:3.18
 
+# iproute2 is necessary for ss route testing in nginx, via `make check` `ports`
 RUN apk update && apk add --no-cache \
     nginx \
     openssl
-    iproute2       # necessary for ss route testing in nginx, via `make check` `ports`
+    iproute2
 
 RUN mkdir -p /etc/nginx/ssl /run/nginx
 
