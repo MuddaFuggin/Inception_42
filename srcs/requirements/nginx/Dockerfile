@@ -3,6 +3,7 @@ FROM alpine:3.18
 RUN apk update && apk add --no-cache \
     nginx \
     openssl
+    iproute2       # necessary for ss route testing in nginx, via `make check` `ports`
 
 RUN mkdir -p /etc/nginx/ssl /run/nginx
 
