@@ -1,7 +1,9 @@
 FROM debian:bookworm
 
-# Installation de PHP-FPM, des extensions nécessaires et de curl/mariadb-client
+# Installation of PHP-FPM, all mandatory extensions and curl/mariadb-client
+# iproute2 is necessary for ss route testing in wordpress, via `make check` `ports`
 RUN apt-get update && apt-get install -y --no-install-recommends \
+	iproute2 \
     php8.2-fpm \
     php8.2-mysql \
     php8.2-gd \
@@ -12,18 +14,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     mariadb-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Téléchargement et installation de WP-CLI (outil en ligne de commande pour WordPress)
+# Downloading and installing WP-CLI (WordPress command-line tool)
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
 
-# Création du dossier web et attribution des droits à l'utilisateur www-data
+# Creating the web directory and assigning permissions to the www-data user
 RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
 
-# Copie de la configuration PHP-FPM personnalisée
+# Copying the custom PHP-FPM configuration
 COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-# Copie du script d'initialisation
+# Copying the initialization script
 COPY tools/wordpress_entrypoint.sh /usr/local/bin/wordpress_entrypoint.sh
 RUN chmod +x /usr/local/bin/wordpress_entrypoint.sh
 
