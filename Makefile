@@ -1,5 +1,6 @@
 RED     = \033[0;31m
 YELLOW  = \033[0;33m
+YYELLOW = \033[1;93m
 RESET   = \033[0m
 
 MAKEFLAGS += --no-print-directory
@@ -50,16 +51,14 @@ check:
 		sql) \
 			printf "\n\n$(RED) === Welcome to the SQL database connection center. ===  $(RESET)\n\n" ; \
 			printf "$(YELLOW) Once inside the database, type the following (including > ; sign) : $(RESET)\n" ; \
-			printf "SHOW DATABASES;\n" ; \
-			printf "USE $(MYSQL_DATABASE);\n" ; \
-			printf "SHOW TABLES;\n" ; \
-			printf "exit\n\n" ; \
+			printf "$(YYELLOW)SHOW DATABASES;$(RESET)\n" ; \
+			printf "$(YYELLOW)USE $(MYSQL_DATABASE);$(RESET)\n" ; \
+			printf "$(YYELLOW)SHOW TABLES;$(RESET)\n" ; \
+			printf "$(YYELLOW)exit$(RESET)\n\n" ; \
 			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n" ; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ;\
 			printf "$(RED)=== 2. Connexion with USER and Database check===$(RESET)\n" ; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; \
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW DATABASE;" ;\
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW TABLES;" ;\
 			make check ;; \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
