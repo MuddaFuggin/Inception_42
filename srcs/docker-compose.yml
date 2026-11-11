@@ -26,7 +26,7 @@ services:
     container_name: wordpress
     restart: always
     depends_on:
-      - mariadb
+      - mariadb                          # Defines launching order
     env_file:
       - .env
     environment:
