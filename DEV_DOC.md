@@ -185,27 +185,34 @@ And many more...
 
 ## Three Containers, one goal : Role of the Containers and Inter-Container Interactions
 
-The project relies on three distinct services, each isolated in its own container and communicating through a private Docker bridge network (`inception_net`).
+The project relies on three distinct services, each isolated in its own container and communicating through a private internal Docker bridge network (inception_net). The operation relies on a strict separation of tasks and how the main router sorts incoming requests.
 
-### 1. Role of Each Container
-- **NGINX (Reverse Proxy & TLS Termination):**
-  - **Role:** Acts as the single entry point for all external client traffic. It enforces TLS v1.2 / v1.3 encryption, handles secure HTTPS requests on port 443, and serves static files directly.
-  - **Process (PID 1):** Runs in the foreground using `daemon off;`.
+1. **NGINX** (The Front-End Web Server & Reverse Proxy)
+It is the only container exposed to the outside world, handling secure HTTPS requests on port 443. It acts as the single entry point for all client traffic and separates requests into two distinct streams:
 
-- **WordPress / PHP-FPM (Application Engine):**
-  - **Role:** Executes the core WordPress PHP scripts and business logic. It does not speak directly to the outside world via HTTP; instead, it processes dynamic requests delegated by NGINX.
-  - **Process (PID 1):** Runs in force-foreground mode using `php-fpm -F`.
+    Static Requests Stream (CSS, JS, images): When a client requests a static asset, NGINX retrieves it directly from the shared volume (/var/www/html) and serves it instantly. The other containers are not involved or woken up.
 
-- **MariaDB (Relational Database):**
-  - **Role:** Stores all persistent application data, including user accounts, posts, comments, and settings in a relational SQL database.
-  - **Process (PID 1):** Runs directly as the main database daemon (`mysqld`).
+    Dynamic Requests Stream (.php files): NGINX cannot interpret PHP code. When a client requests a dynamic web page (e.g., index.php), NGINX forwards the request to the WordPress container via the internal network using the FastCGI protocol on port 9000.
 
-### 2. How They Interact
-The containers interact through specific protocols over the private internal network:
-1. **Client to NGINX:** The user sends an HTTPS request to the domain on port 443.
-2. **NGINX to WordPress (FastCGI):** When a dynamic `.php` file is requested, NGINX forwards the request to the WordPress container using the **FastCGI protocol** on internal port `9000` (`fastcgi_pass wordpress:9000;`).
-3. **WordPress to MariaDB (SQL):** To fetch or write data, WordPress connects to the MariaDB container via the **MySQL/SQL protocol** on internal port `3306` (`WORDPRESS_DB_HOST=mariadb:3306`).
-4. **Shared Volumes:** Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly.
+2. **WordPress** / PHP-FPM (The Application Engine)
+Invisible from the outside, its strict role is to execute the core WordPress PHP scripts and business logic.
+
+    It receives the order from NGINX to process a specific PHP file.
+
+    During execution, it needs to query the database to retrieve articles or verify passwords, so it connects to the MariaDB container via the MySQL/SQL protocol on internal port 3306.
+
+    Once it has assembled the data into a standard HTML page, it sends the finished product back to NGINX, which transfers it to the client.
+
+3. **MariaDB** (The Relational Database)
+Located at the very end of the chain, this container is completely isolated.
+
+    It only communicates with the WordPress container.
+
+    It stores all persistent application data, including user accounts, posts, comments, and site configuration, in its own secure volume.
+
+    It receives SQL queries from WordPress, reads or modifies the requested data, and sends the results back so WordPress can finish generating the page.
+   
+4. Shared Volumes: Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly.
 
 <br><br>
 ****
