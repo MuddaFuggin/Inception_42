@@ -227,9 +227,9 @@ It strictly contains the rendering engine, configuration files, and media :
 * The WordPress PHP source code: Includes the root files (e.g., index.php, wp-login.php) and system folders (wp-admin/, wp-includes/) needed to build the site's visuals.  
 * The wp-config.php file: Contains the core site configuration and the credentials used to connect with MariaDB.  
 * The wp-content/ folder:  
-		uploads/: Images, photos, and media uploaded by users.  
-		themes/: Graphic themes and stylesheets (CSS).  
-		plugins/: Extensions installed on the site.  
+			uploads/: Images, photos, and media uploaded by users.  
+			themes/: Graphic themes and stylesheets (CSS).  
+			plugins/: Extensions installed on the site.  
 
 ### Configuration
 
