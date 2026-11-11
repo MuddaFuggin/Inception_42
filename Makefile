@@ -58,11 +58,11 @@ check:
 			printf "\n\n"; make check ;; \
 		sql) \
 			printf "\n\n$(RED) === Welcome to the MariaDb database connection center. ===  $(RESET)\n\n" ; \
-			printf "$(YELLOW) Once inside the database, type the following SQL requests (including > ; sign) : $(RESET)\n" ; \
+			printf "$(YELLOW) Once inside the database, type the following SQL requests (including the ; sign) : $(RESET)\n\n" ; \
 			printf "$(YYELLOW)SHOW DATABASES;$(RESET)\n" ; \
 			printf "$(YYELLOW)USE $(MYSQL_DATABASE);$(RESET)\n" ; \
 			printf "$(YYELLOW)SHOW TABLES;$(RESET)\n" ; \
-			printf "$(YYELLOW)exit$(RESET)\n\n" ; \
+			printf "$(YYELLOW)exit$(RESET)\n" ; \
 			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n" ; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ;\
 			printf "$(RED)=== 2. Connexion with USER and Database check===$(RESET)\n" ; \
