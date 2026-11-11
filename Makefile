@@ -56,13 +56,10 @@ check:
 			printf "exit\n\n"; \
 			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n"; \
 			printf "$(YELLOW)(type Ctrl+C to force exit)$(RESET)\n\n"; \
-			if ! docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; do \
-				printf "\n$(RED)Password refused.$(RESET)\n\n"; \
-			done; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p;\
 			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n"; \
 			printf "Once inside the database, type exit to escape.\n"; \
-			if ! docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; do \
-				printf "\n$(RED)Password refused.$(RESET)\n\n"; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW DATABASE;"
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW TABLES;"
 			make check ;; \
