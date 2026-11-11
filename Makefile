@@ -48,8 +48,17 @@ check:
 	@read -p "Type one of those : [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		sql) \
-			printf "\n\n$(RED)=== 1. Test root without password ===$(RESET)\n\n"; \
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u root -p; \
+			printf "\n\n$(RED) === Welcome to the SQL database connection center. ===  $(RESET)\n\n"; \
+			printf "$(YELLOW)Once inside the database, type the following (including > ; sign) : $(RESET)\n"; \
+			printf "SHOW DATABASES;\n"; \
+			printf "USE $(MYSQL_DATABASE);\n"; \
+			printf "SHOW TABLES;\n"; \
+			printf "exit\n\n"; \
+			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n"; \
+			printf "$(YELLOW)(type Ctrl+C to force exit)$(RESET)\n\n"; \
+			while ! docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; do \
+				printf "\n$(RED)Mot de passe refusé. Nouvelle tentative...$(RESET)\n\n"; \
+			done; \
 			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n"; \
 			printf "Once inside the database, type : (including > ; sign)\n"; \
 			printf "SHOW DATABASES;\n"; \
