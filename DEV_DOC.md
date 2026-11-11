@@ -187,32 +187,24 @@ And many more...
 
 The project relies on three distinct services, each isolated in its own container and communicating through a private internal Docker bridge network (inception_net). The operation relies on a strict separation of tasks and how the main router sorts incoming requests.
 
-1. **NGINX** (The Front-End Web Server & Reverse Proxy)
+1. **NGINX** (The Front-End Web Server & Reverse Proxy)  
 It is the only container exposed to the outside world, handling secure HTTPS requests on port 443. It acts as the single entry point for all client traffic and separates requests into two distinct streams:
+Static Requests Stream (CSS, JS, images): When a client requests a static asset, NGINX retrieves it directly from the shared volume (/var/www/html) and serves it instantly. The other containers are not involved or woken up.
+Dynamic Requests Stream (.php files): NGINX cannot interpret PHP code. When a client requests a dynamic web page (e.g., index.php), NGINX forwards the request to the WordPress container via the internal network using the FastCGI protocol on port 9000.
 
-    Static Requests Stream (CSS, JS, images): When a client requests a static asset, NGINX retrieves it directly from the shared volume (/var/www/html) and serves it instantly. The other containers are not involved or woken up.
-
-    Dynamic Requests Stream (.php files): NGINX cannot interpret PHP code. When a client requests a dynamic web page (e.g., index.php), NGINX forwards the request to the WordPress container via the internal network using the FastCGI protocol on port 9000.
-
-2. **WordPress** / PHP-FPM (The Application Engine)
+2. **WordPress** / PHP-FPM (The Application Engine)  
 Invisible from the outside, its strict role is to execute the core WordPress PHP scripts and business logic.
+It receives the order from NGINX to process a specific PHP file.
+During execution, it needs to query the database to retrieve articles or verify passwords, so it connects to the MariaDB container via the MySQL/SQL protocol on internal port 3306.
+Once it has assembled the data into a standard HTML page, it sends the finished product back to NGINX, which transfers it to the client.
 
-    It receives the order from NGINX to process a specific PHP file.
-
-    During execution, it needs to query the database to retrieve articles or verify passwords, so it connects to the MariaDB container via the MySQL/SQL protocol on internal port 3306.
-
-    Once it has assembled the data into a standard HTML page, it sends the finished product back to NGINX, which transfers it to the client.
-
-3. **MariaDB** (The Relational Database)
+3. **MariaDB** (The Relational Database)  
 Located at the very end of the chain, this container is completely isolated.
-
-    It only communicates with the WordPress container.
-
-    It stores all persistent application data, including user accounts, posts, comments, and site configuration, in its own secure volume.
-
-    It receives SQL queries from WordPress, reads or modifies the requested data, and sends the results back so WordPress can finish generating the page.
+It only communicates with the WordPress container.
+It stores all persistent application data, including user accounts, posts, comments, and site configuration, in its own secure volume.
+It receives SQL queries from WordPress, reads or modifies the requested data, and sends the results back so WordPress can finish generating the page.
    
-4. Shared Volumes: Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly.
+4. **_Shared Volumes_**: Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly.
 
 <br><br>
 ****
