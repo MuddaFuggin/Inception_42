@@ -1,9 +1,7 @@
 FROM debian:bookworm
 
 # Installation of PHP-FPM, all mandatory extensions and curl/mariadb-client
-# iproute2 is necessary for ss route testing in wordpress, via `make check` `ports`
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	iproute2 \
     php8.2-fpm \
     php8.2-mysql \
     php8.2-gd \
