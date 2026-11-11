@@ -142,7 +142,7 @@ _Note : Please replace all '{your_domain_name}' entries by the domain name you i
 * For administration panel :
 `google-chrome --incognito --host-resolver-rules="MAP {your_domain_name} 127.0.0.1" "https://{your_domain_name}:4443/wp-admin/"`   
 
-* _Alternatively, to access your administrations panel, you can simply follow the prompted instructions in_ `make check` > `openweb`.
+* Alternatively, to access your administrations panel, you can simply follow the prompted instructions in `make check` > `openweb` (see section named "Various available tests" on this document).
   
 *Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
@@ -174,6 +174,7 @@ Type the following for some interesting tests :
 - `images` : Displays local Docker image information.
 - `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used  
 - `ports` : Scans all 65.535 existing ports to display opened, closed or restricted ports.
+- `openweb` : Displays instructions about displaying your website on your physical machine's browser. 
 - `wp` > `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.  
 - `wp` > `security` : displays TLS status.
 - `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
