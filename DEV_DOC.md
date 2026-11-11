@@ -237,6 +237,9 @@ All external web traffic is secured using TLS encryption. Nginx is configured to
 - They are stored in the `/etc/nginx/ssl/` directory inside the container.
 - NGINX uses them in its `nginx.conf` configuration file through the `ssl_certificate` and `ssl_certificate_key` directives to secure communications over port 443 using TLS v1.2 / v1.3.
 
+*A quick explanation : the TLS certificate is given to your server's client to encrypt his own data when it communicates with your website and server. The TLS key is used by your server to decrypt your client's requests, that has been encrypted using the TLS certificate.  
+In this project, our TLS certificate has not been signed by competent authority : it still does it's job but isn't trusted by your client's browser.*
+
 #### Host-Level File Permissions & Ownership:
 
 The raw credential files stored in the host's secrets/ directory are strictly protected using restricted permissions (chmod 600), ensuring that only the authorized owner (and root) on the host machine can read them.
