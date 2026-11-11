@@ -144,7 +144,7 @@ _Note : Please replace all '{your_domain_name}' entries by the domain name you i
 
 *Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
-**Alternatively, to access your administrations panel, you can simply follow the prompted instructions in `make check` > `openweb`.**
+**_Alternatively, to access your administrations panel, you can simply follow the prompted instructions in** `make check` > `openweb`.
 
 
 #### Accessing the website from a graphical Debian setup :
