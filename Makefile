@@ -50,14 +50,13 @@ check:
 		sql) \
 			printf "\n$(RED)=== 1. Test root without password ===$(RESET)\n"; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u root ; \
-			printf "$(RED)=== 2. Connexion with user ===$(RESET)\n"; \
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ; \
-			printf "$(RED)=== 3. Database check ===$(RESET)\n"; \
+			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n"; \
 			printf "Once inside the database, type :\n"; \
 			printf "SHOW DATABASES;\n"; \
 			printf "USE $(MYSQL_DATABASE);\n"; \
 			printf "SHOW TABLES;\n"; \
 			printf "exit\n\n"; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ; \
 			make check ;; \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
