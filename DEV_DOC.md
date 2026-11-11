@@ -209,8 +209,6 @@ It receives SQL queries from WordPress, reads or modifies the requested data, an
 
 <br><br>
 
-<br>
-
 ## About your data, and Volumes :
 
 * As this configuration uses mounted *Named Volumes with local bind mount*, everything you add or remove from your website will persist overtime. **Unless you go** `make fclean` **!**
@@ -253,10 +251,7 @@ Containers do not share a global security context. Secrets are explicitly distri
 #### No Persistent Disk Footprint Inside Containers:
 
 Because Docker mounts secrets using an in-memory tmpfs filesystem (/run/secrets/), no sensitive passwords are ever written to the container's writable storage layer. Once a container stops, all secret data instantly vanishes from memory without leaving forensic traces on the disk.
-<br><br><br>
-****
-****
-<br>
+<br><br>
 
 ## A few words about the infrastructure used, and the advantages of using Docker containers.
 
