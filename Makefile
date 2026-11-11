@@ -49,7 +49,7 @@ check:
 	@read -p "Type one of those : [opensite] [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		opensite) \
-			@printf "\ngoogle-chrome --incognito --host-resolver-rules="MAP $(DOMAIN_NAME) 127.0.0.1" "https://$(DOMAIN_NAME):4443/"\n" make check ;; \
+			printf '\ngoogle-chrome --incognito --host-resolver-rules="MAP $(DOMAIN_NAME) 127.0.0.1" "https://$(DOMAIN_NAME):4443/"\n' ; make check ;; \
 		sql) \
 			printf "\n\n$(RED) === Welcome to the MariaDb database connection center. ===  $(RESET)\n\n" ; \
 			printf "$(YELLOW) Once inside the database, type the following SQL requests (including > ; sign) : $(RESET)\n" ; \
