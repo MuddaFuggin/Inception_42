@@ -55,10 +55,8 @@ check:
 			printf "SHOW TABLES;\n" ; \
 			printf "exit\n\n" ; \
 			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n" ; \
-			printf "$(YELLOW)(type Ctrl+C to force exit)$(RESET)\n\n" ; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ;\
-			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n" ; \
-			printf "Once inside the database, type exit to escape.\n"; \
+			printf "$(RED)=== 2. Connexion with USER and Database check===$(RESET)\n" ; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW DATABASE;" ;\
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW TABLES;" ;\
