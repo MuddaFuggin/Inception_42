@@ -45,7 +45,7 @@ restart :
 #### -------- DIAGNOSIS --------  ####
 
 check:
-	@read -p "Type one of those : [ports] [log] [status] [volumes] [user] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
+	@read -p "Type one of those : [ports] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
