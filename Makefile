@@ -106,11 +106,7 @@ check:
 		ip) \
 			echo "\n" ; hostname -I ; echo "\n" ; make check ;; \
 		ports) \
-			echo "\n$(RED)=== Displaying all ports Listening in Nginx, wordpress, mariadb ===$(RESET)\n"; \
-			docker exec -it nginx ss -tln ; \
-			docker exec -it wordpress ss -tln ; \
-			docker exec -it mariadb ss -tln ; \
-			echo "\n$(RED)=== BONUS TEST : Scanning all 65.535 existing ports to display opened, closed or restricted ! ===$(RESET)\n" ; \
+			echo "\n$(RED)=== Scanning all 65.535 existing ports to display opened, closed or restricted. ===$(RESET)\n" ; \
 			nmap -p- csimonne.42.fr  ;; \
 		exit) \
 			exit 0 ;; \
