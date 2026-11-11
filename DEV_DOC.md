@@ -211,7 +211,7 @@ It receives SQL queries from WordPress, reads or modifies the requested data, an
 
 ## About your data, and Volumes :
 
-#### What's in the volumes ?
+### What's in the volumes ?
 
 **The MariaDB Volume** (data/mariadb)  
 It stores the complete state of the SQL server as well as the textual content of your site :  
@@ -229,7 +229,7 @@ It strictly contains the rendering engine, configuration files, and media :
 	        themes/: Graphic themes and stylesheets (CSS).  
 	        plugins/: Extensions installed on the site.  
 
-#### Configuration
+### Configuration
 
 * As this configuration uses mounted *Named Volumes with local bind mount*, everything you add or remove from your website will persist overtime. **Unless you go** `make fclean` **!**
 * Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=  ` in the `.env` file :    
