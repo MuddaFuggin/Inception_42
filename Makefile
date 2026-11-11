@@ -46,7 +46,7 @@ restart :
 #### -------- DIAGNOSIS --------  ####
 
 check:
-	@read -p "Type one of those : [opensite] [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
+	@read -p "Type one of those : [openweb] [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		openweb) \
 			printf '\ngoogle-chrome --incognito --host-resolver-rules="MAP $(DOMAIN_NAME) 127.0.0.1" "https://$(DOMAIN_NAME):4443/wp-admin/"\n' ; make check ;; \
