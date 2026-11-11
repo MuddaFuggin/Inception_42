@@ -169,9 +169,9 @@ Type the following for some interesting tests :
 - `log` : Displays the real-time execution logs for the NGINX, MariaDB, or WordPress containers.
 - `volumes` : Displays the Docker volume configurations and lists the physical persistent files currently stored on the host machine.
 - `images` : Displays local Docker image information.
-- `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used.
-- `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
+- `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used  
 - `ports` : Scans all 65.535 existing ports to display opened, closed or restricted ports.
+- `wp` > `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.  
 - `wp` > `security` : displays TLS status.
 - `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
 
