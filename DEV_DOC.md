@@ -1,5 +1,5 @@
 
-## Inception : A map of the project
+## Inception : project's file tree
 
 
 ```text
