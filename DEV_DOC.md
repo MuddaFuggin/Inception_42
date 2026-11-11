@@ -211,6 +211,26 @@ It receives SQL queries from WordPress, reads or modifies the requested data, an
 
 ## About your data, and Volumes :
 
+#### What's in the volumes ?
+
+1. The MariaDB Volume (data/mariadb)  
+It stores the complete state of the SQL server as well as the textual content of your site:
+    The mysql/ folder: Contains the SQL user accounts, passwords, and access rights.
+    Your database folder (e.g., wordpress/ or inception_db/): Houses your tables, the raw text of your articles, comments, and site data.
+    The InnoDB engine files (ibdata1, transaction logs): Manage the internal structure, disk cache, and ensure data recovery after a crash.
+    System folders and files (performance_schema/, aria_log...): Store performance metrics and internal server state logs.
+
+2. The WordPress Volume (data/wordpress mounted on /var/www/html)  
+It strictly contains the rendering engine, configuration files, and media:
+    The WordPress PHP source code: Includes the root files (e.g., index.php, wp-login.php) and system folders (wp-admin/, wp-includes/) needed to build the site's visuals.
+    The wp-config.php file: Contains the core site configuration and the credentials used to connect with MariaDB.
+    The wp-content/ folder:
+        uploads/: Images, photos, and media uploaded by users.
+        themes/: Graphic themes and stylesheets (CSS).
+        plugins/: Extensions installed on the site.
+
+#### Configuration
+
 * As this configuration uses mounted *Named Volumes with local bind mount*, everything you add or remove from your website will persist overtime. **Unless you go** `make fclean` **!**
 * Here's the path to your Named Volumes, depending on what indications you gave to the section `DATA_PATH=  ` in the `.env` file :    
 `${DATA_PATH}`/mariadb (pour la base de données)  
