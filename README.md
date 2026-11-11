@@ -64,11 +64,11 @@ Type the following for some interesting tests :
 
 - `status` : Checks which processes are _up_ and running.
 - `volumes` : Displays the Docker volume configurations and lists the physical persistent files currently stored on the host machine.
-- `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
+- `wp` > `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
 - `images` : Displays local Docker image information.
 - `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used..
 - `log` : Displays the real-time execution logs for the NGINX, MariaDB, or WordPress containers.
-- `wp` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS).
+- `wp` > httptest : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS).
 
 
 ## Resources
