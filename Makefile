@@ -49,7 +49,7 @@ check:
 	case "$${ans:-N}" in \
 		sql) \
 			printf "\n\n$(RED)=== 1. Test root without password ===$(RESET)\n\n"; \
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u root ; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u root -p; \
 			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n"; \
 			printf "Once inside the database, type : (including > ; sign)\n"; \
 			printf "SHOW DATABASES;\n"; \
