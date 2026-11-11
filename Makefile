@@ -48,10 +48,10 @@ check:
 	@read -p "Type one of those : [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		sql) \
-			printf "\n$(RED)=== 1. Test root without password ===$(RESET)\n"; \
+			printf "\n\n$(RED)=== 1. Test root without password ===$(RESET)\n\n"; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u root ; \
 			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n"; \
-			printf "Once inside the database, type :\n"; \
+			printf "Once inside the database, type : (including > ; sign)\n"; \
 			printf "SHOW DATABASES;\n"; \
 			printf "USE $(MYSQL_DATABASE);\n"; \
 			printf "SHOW TABLES;\n"; \
