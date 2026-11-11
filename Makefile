@@ -45,8 +45,17 @@ restart :
 #### -------- DIAGNOSIS --------  ####
 
 check:
-	@read -p "Type one of those : [ports] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
+	@read -p "Type one of those : [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
+		sql) \
+			printf "\n$(RED)=== 1. Test root without password ===$(RESET)\n"; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u root ; \
+			printf "$(RED)=== 2. Connexion with user ===$(RESET)\n"; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ; \
+			printf "$(RED)=== 3. Database check ===$(RESET)\n"; \
+			SHOW DATABASES ; \
+			SHOW TABLES ; \
+			make check ;; \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
 			case "$${ans:-N}" in \
