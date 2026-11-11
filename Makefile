@@ -53,7 +53,7 @@ check:
 			printf "$(RED) ==== How to Access your website on your Host Machine's Browser : ===== $(RESET)\n\n" ; \
 			printf "$(YYELLOW) 1. Copy this line below, and paste it in your host machine's bash terminal (outside of this VM). Then, Execute it. $(RESET)\n" ; \
 			printf '\ngoogle-chrome --incognito --host-resolver-rules="MAP $(DOMAIN_NAME) 127.0.0.1" "https://$(DOMAIN_NAME):4443/wp-admin/"\n\n' ;\
-			printf "$(YELLOW) 2. In the wordpress page's credentials, use one of the USERS listed next (of course, your password will also be asked) : ;$(RESET)\n\n" ; \
+			printf "$(YYELLOW) 2. In the wordpress page's credentials, use one of the USERS listed next (of course, your password will also be asked) : ;$(RESET)\n\n" ; \
 			docker compose -f srcs/docker-compose.yml exec wordpress wp user list --allow-root --path=/var/www/html ; \
 			printf "\n\n"; make check ;; \
 		sql) \
