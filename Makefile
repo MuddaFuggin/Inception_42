@@ -49,7 +49,13 @@ check:
 	@read -p "Type one of those : [openweb] [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		openweb) \
+			printf "\n\n" ; \
+			printf "$(YYELLOW) ==== How to Access your website on your Host Machine's Browser : ===== $(RESET)\n\n" ; \
+			printf "$(YYELLOW) 1. Copy this line below, and paste it in your host machine's bash command invite (outside of this VM). Execute. $(RESET)\n" ; \
 			printf '\ngoogle-chrome --incognito --host-resolver-rules="MAP $(DOMAIN_NAME) 127.0.0.1" "https://$(DOMAIN_NAME):4443/wp-admin/"\n' ; make check ;; \
+			printf "$(YELLOW) 2. In the wordpress page's credentials, use one of the USERS listed next (of course, your password will also be asked) : ;$(RESET)\n\n" ; \
+			docker compose -f srcs/docker-compose.yml exec wordpress wp user list --allow-root --path=/var/www/html ; make check ;; \
+			printf "\n\n" ; \
 		sql) \
 			printf "\n\n$(RED) === Welcome to the MariaDb database connection center. ===  $(RESET)\n\n" ; \
 			printf "$(YELLOW) Once inside the database, type the following SQL requests (including > ; sign) : $(RESET)\n" ; \
