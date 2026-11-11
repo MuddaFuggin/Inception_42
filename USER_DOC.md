@@ -60,15 +60,17 @@ _disclaimer : A security warning will appear due to the self-signed SSL/TLS cert
 
 #### With this particular 'headless' Linux Debian setup :
 
-If you are using the same Linux-Debian environment configuration as the developper (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please type the following _from your physical machine's terminal_ :
+If you are using the same Linux-Debian environment configuration as the developper (no graphical interface), you must force a DNS redirection to bypass the NAT. To do so, please follow those instructions :
 
-* For the website :
-`google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/"`   
+1. Inside of your VM, access the _Inception_42_ directory, typing : `cd ~/Inception_42`
 
-* For administration panel :
-`google-chrome --incognito --host-resolver-rules="MAP csimonne.42.fr 127.0.0.1" "https://csimonne.42.fr:4443/wp-admin/"`   
+2. Type `make check`, and then `openweb`.
 
-*Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
+3. Follow the instructions displayed.
+
+*Note 1 :* : those are the instructions to access the _dashboard_ of the website. If you wish to access the root page, you can take the exact same steps as before, only replacing the *"https://{your_domain_name}:4443/wp-admin/"* part by the following : *"https://{your_domain_name}:4443/"*, in your physical host machine's terminal. (Of course, tou should keep the specific domain name displayed.
+
+*Note 2 :* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
 #### Accessing the website from a graphical Debian setup :
 
