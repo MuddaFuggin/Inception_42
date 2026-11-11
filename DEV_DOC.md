@@ -195,7 +195,7 @@ The project relies on three distinct services, each isolated in its own containe
 
 1. **NGINX** (The Front-End Web Server & Reverse Proxy)  
 It is the only container exposed to the outside world, handling secure HTTPS requests on port 443. It acts as the single entry point for all client traffic and separates requests into two distinct streams:
-Static Requests Stream (CSS, JS, images): When a client requests a static asset, NGINX retrieves it directly from the shared volume (/var/www/html) and serves it instantly. The other containers are not involved or woken up.
+Static Requests Stream (CSS, JS, images): When a client requests a static asset, NGINX retrieves it directly from the shared volume (wordpress_data:/var/www/html) and serves it instantly. The other containers are not involved or woken up.
 Dynamic Requests Stream (.php files): NGINX cannot interpret PHP code. When a client requests a dynamic web page (e.g., index.php), NGINX forwards the request to the WordPress container via the internal network using the FastCGI protocol on port 9000.
 
 2. **WordPress** / PHP-FPM (The Application Engine)  
