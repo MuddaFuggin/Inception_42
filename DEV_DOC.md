@@ -208,8 +208,7 @@ It receives SQL queries from WordPress, reads or modifies the requested data, an
 4. **_Shared Volumes_**: Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly.
 
 <br><br>
-****
-****
+
 <br>
 
 ## About your data, and Volumes :
