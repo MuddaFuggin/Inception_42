@@ -174,6 +174,7 @@ Type the following for some interesting tests :
 - `wp` > `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.  
 - `wp` > `security` : displays TLS status.
 - `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
+- `sql` : Gives you access to your MariaDb's SQL prompting tool via an interactive script, asking for your ADMIN password, then your USER password, granting you access to SQL commands, some of which are described in the interactive script.
 
 And many more...  
 <br><br>
