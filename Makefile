@@ -48,20 +48,20 @@ check:
 	@read -p "Type one of those : [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		sql) \
-			printf "\n\n$(RED) === Welcome to the SQL database connection center. ===  $(RESET)\n\n"; \
-			printf "$(YELLOW)Once inside the database, type the following (including > ; sign) : $(RESET)\n"; \
-			printf "SHOW DATABASES;\n"; \
-			printf "USE $(MYSQL_DATABASE);\n"; \
-			printf "SHOW TABLES;\n"; \
-			printf "exit\n\n"; \
-			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n"; \
-			printf "$(YELLOW)(type Ctrl+C to force exit)$(RESET)\n\n"; \
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p;\
-			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n"; \
+			printf "\n\n$(RED) === Welcome to the SQL database connection center. ===  $(RESET)\n\n" ; \
+			printf "$(YELLOW) Once inside the database, type the following (including > ; sign) : $(RESET)\n" ; \
+			printf "SHOW DATABASES;\n" ; \
+			printf "USE $(MYSQL_DATABASE);\n" ; \
+			printf "SHOW TABLES;\n" ; \
+			printf "exit\n\n" ; \
+			printf "\n$(RED)=== Root connection to SQL ===$(RESET)\n" ; \
+			printf "$(YELLOW)(type Ctrl+C to force exit)$(RESET)\n\n" ; \
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p ;\
+			printf "$(RED)=== 2. Connexion with user and Database check===$(RESET)\n" ; \
 			printf "Once inside the database, type exit to escape.\n"; \
 			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p; \
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW DATABASE;"
-			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW TABLES;"
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW DATABASE;" ;\
+			docker compose -f srcs/docker-compose.yml exec mariadb mysql -u $(MYSQL_USER) -p $(MYSQL_DATABASE) -e "SHOW TABLES;" ;\
 			make check ;; \
 		log) \
 			read -p "Type [nginx] [mariadb] [wp] or [back]: " ans; \
