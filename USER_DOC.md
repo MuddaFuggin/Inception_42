@@ -68,7 +68,7 @@ If you are using the same Linux-Debian environment configuration as the developp
 
 3. Follow the instructions displayed.
 
-*Note 1 :* : those are the instructions to access the _dashboard_ of the website. If you wish to access the root page, you can take the exact same steps as before, only replacing the *"https://{your_domain_name}:4443/wp-admin/"* part by the following : *"https://{your_domain_name}:4443/"*, in your physical host machine's terminal. (Of course, tou should keep the specific domain name displayed.
+*Note 1 :* Those are the instructions to access the _dashboard_ of the website. If you wish to access the root page, you can take the exact same steps as before, only replacing **"https://{your_domain_name}:4443/wp-admin/"** by **"https://{your_domain_name}:4443/"** inside of the entire address copied. (Of course, you should keep the specific domain name that has been displayed previously.
 
 *Note 2 :* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
