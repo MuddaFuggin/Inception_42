@@ -143,7 +143,7 @@ _Note : Please replace all '{your_domain_name}' entries by the domain name you i
 `google-chrome --incognito --host-resolver-rules="MAP {your_domain_name} 127.0.0.1" "https://{your_domain_name}:4443/wp-admin/"`   
 
 * _Alternatively, to access your administrations panel, you can simply follow the prompted instructions in_ `make check` > `openweb`.
-* 
+  
 *Note:* You can replace 'google-chrome' with another Chromium-based browser prompt, but this specific DNS injection flag does not work with Firefox.
 
 
