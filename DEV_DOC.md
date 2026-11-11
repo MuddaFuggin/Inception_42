@@ -187,23 +187,23 @@ The project relies on three distinct services, each isolated in its own containe
 
 ### 1. Role of Each Container
 - **NGINX (Reverse Proxy & TLS Termination):**
-  - **Role:** Acts as the single entry point for all external client traffic[cite: 8]. It enforces TLS v1.2 / v1.3 encryption, handles secure HTTPS requests on port 443, and serves static files directly[cite: 8, 14].
-  - **Process (PID 1):** Runs in the foreground using `daemon off;`[cite: 13].
+  - **Role:** Acts as the single entry point for all external client traffic. It enforces TLS v1.2 / v1.3 encryption, handles secure HTTPS requests on port 443, and serves static files directly.
+  - **Process (PID 1):** Runs in the foreground using `daemon off;`.
 
 - **WordPress / PHP-FPM (Application Engine):**
   - **Role:** Executes the core WordPress PHP scripts and business logic. It does not speak directly to the outside world via HTTP; instead, it processes dynamic requests delegated by NGINX.
-  - **Process (PID 1):** Runs in force-foreground mode using `php-fpm -F`[cite: 13].
+  - **Process (PID 1):** Runs in force-foreground mode using `php-fpm -F`.
 
 - **MariaDB (Relational Database):**
   - **Role:** Stores all persistent application data, including user accounts, posts, comments, and settings in a relational SQL database.
-  - **Process (PID 1):** Runs directly as the main database daemon (`mysqld`)[cite: 13].
+  - **Process (PID 1):** Runs directly as the main database daemon (`mysqld`).
 
 ### 2. How They Interact
 The containers interact through specific protocols over the private internal network:
-1. **Client to NGINX:** The user sends an HTTPS request to the domain on port 443[cite: 8].
-2. **NGINX to WordPress (FastCGI):** When a dynamic `.php` file is requested, NGINX forwards the request to the WordPress container using the **FastCGI protocol** on internal port `9000` (`fastcgi_pass wordpress:9000;`)[cite: 8, 11].
-3. **WordPress to MariaDB (SQL):** To fetch or write data, WordPress connects to the MariaDB container via the **MySQL/SQL protocol** on internal port `3306` (`WORDPRESS_DB_HOST=mariadb:3306`)[cite: 8, 11].
-4. **Shared Volumes:** Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly[cite: 14].
+1. **Client to NGINX:** The user sends an HTTPS request to the domain on port 443.
+2. **NGINX to WordPress (FastCGI):** When a dynamic `.php` file is requested, NGINX forwards the request to the WordPress container using the **FastCGI protocol** on internal port `9000` (`fastcgi_pass wordpress:9000;`).
+3. **WordPress to MariaDB (SQL):** To fetch or write data, WordPress connects to the MariaDB container via the **MySQL/SQL protocol** on internal port `3306` (`WORDPRESS_DB_HOST=mariadb:3306`).
+4. **Shared Volumes:** Both NGINX and WordPress mount the same shared WordPress source code volume so that NGINX can verify file existence and serve static assets directly.
 
 <br><br>
 ****
