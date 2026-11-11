@@ -49,8 +49,8 @@ check:
 	@read -p "Type one of those : [ports] [sql] [log] [status] [volumes] [images] [versions] [wp] [ip] or [clear] / [exit]: " ans; \
 	case "$${ans:-N}" in \
 		sql) \
-			printf "\n\n$(RED) === Welcome to the SQL database connection center. ===  $(RESET)\n\n" ; \
-			printf "$(YELLOW) Once inside the database, type the following (including > ; sign) : $(RESET)\n" ; \
+			printf "\n\n$(RED) === Welcome to the MariaDb database connection center. ===  $(RESET)\n\n" ; \
+			printf "$(YELLOW) Once inside the database, type the following SQL requests (including > ; sign) : $(RESET)\n" ; \
 			printf "$(YYELLOW)SHOW DATABASES;$(RESET)\n" ; \
 			printf "$(YYELLOW)USE $(MYSQL_DATABASE);$(RESET)\n" ; \
 			printf "$(YYELLOW)SHOW TABLES;$(RESET)\n" ; \
