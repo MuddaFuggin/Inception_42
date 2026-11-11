@@ -171,7 +171,7 @@ Type the following for some interesting tests :
 - `images` : Displays local Docker image information.
 - `versions` : Extracts the FROM directive from the Dockerfiles to display which base OS images were used.
 - `user` : Lists the registered WordPress users via WP-CLI to verify account roles and usernames.
-- `ports` : Displays all ports Listening in Nginx, wordpress and mariadb + Scans all 65.535 existing ports to display opened, closed or restricted ports.
+- `ports` : Scans all 65.535 existing ports to display opened, closed or restricted ports.
 - `wp` > `security` : displays TLS status.
 - `wp` > `httptest` : Performs 'curl' exposure tests for port 80 (HTTP) and port 443 (HTTPS), verifying secured accessibility (only HTTPS, HTTP gets rejected).
 
